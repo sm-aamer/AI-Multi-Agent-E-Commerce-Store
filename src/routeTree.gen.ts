@@ -9,50 +9,504 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as StoreRouteImport } from './routes/_store'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as StoreIndexRouteImport } from './routes/_store.index'
+import { Route as StoreCartRouteImport } from './routes/_store.cart'
+import { Route as StoreCheckoutRouteImport } from './routes/_store.checkout'
+import { Route as StoreLoginRouteImport } from './routes/_store.login'
+import { Route as StoreRegisterRouteImport } from './routes/_store.register'
+import { Route as StoreShopRouteImport } from './routes/_store.shop'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCustomersRouteImport } from './routes/admin.customers'
+import { Route as AdminDescriptionsRouteImport } from './routes/admin.descriptions'
+import { Route as AdminFraudRouteImport } from './routes/admin.fraud'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
+import { Route as AdminPricingRouteImport } from './routes/admin.pricing'
+import { Route as AdminProductsRouteImport } from './routes/admin.products'
+import { Route as AdminRecommendationsRouteImport } from './routes/admin.recommendations'
+import { Route as AdminRefundsRouteImport } from './routes/admin.refunds'
+import { Route as AdminLoginRouteImport } from './routes/admin_.login'
+import { Route as StoreAccountIndexRouteImport } from './routes/_store.account.index'
+import { Route as StoreProductIdRouteImport } from './routes/_store.product.$id'
+import { Route as StoreAccountOrdersIdRouteImport } from './routes/_store.account.orders.$id'
 
-const IndexRoute = IndexRouteImport.update({
+const StoreRoute = StoreRouteImport.update({
+  id: '/_store',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoreIndexRoute = StoreIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreCartRoute = StoreCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreCheckoutRoute = StoreCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreLoginRoute = StoreLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreRegisterRoute = StoreRegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreShopRoute = StoreShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => StoreRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCustomersRoute = AdminCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDescriptionsRoute = AdminDescriptionsRouteImport.update({
+  id: '/descriptions',
+  path: '/descriptions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFraudRoute = AdminFraudRouteImport.update({
+  id: '/fraud',
+  path: '/fraud',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPricingRoute = AdminPricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProductsRoute = AdminProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRecommendationsRoute = AdminRecommendationsRouteImport.update({
+  id: '/recommendations',
+  path: '/recommendations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRefundsRoute = AdminRefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin_/login',
+  path: '/admin/login',
   getParentRoute: () => rootRouteImport,
+} as any)
+const StoreAccountIndexRoute = StoreAccountIndexRouteImport.update({
+  id: '/account/',
+  path: '/account/',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreProductIdRoute = StoreProductIdRouteImport.update({
+  id: '/product/$id',
+  path: '/product/$id',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreAccountOrdersIdRoute = StoreAccountOrdersIdRouteImport.update({
+  id: '/account/orders/$id',
+  path: '/account/orders/$id',
+  getParentRoute: () => StoreRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof StoreIndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/cart': typeof StoreCartRoute
+  '/checkout': typeof StoreCheckoutRoute
+  '/login': typeof StoreLoginRoute
+  '/register': typeof StoreRegisterRoute
+  '/shop': typeof StoreShopRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/descriptions': typeof AdminDescriptionsRoute
+  '/admin/fraud': typeof AdminFraudRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pricing': typeof AdminPricingRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/recommendations': typeof AdminRecommendationsRoute
+  '/admin/refunds': typeof AdminRefundsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/': typeof AdminIndexRoute
+  '/product/$id': typeof StoreProductIdRoute
+  '/account/': typeof StoreAccountIndexRoute
+  '/account/orders/$id': typeof StoreAccountOrdersIdRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/cart': typeof StoreCartRoute
+  '/checkout': typeof StoreCheckoutRoute
+  '/login': typeof StoreLoginRoute
+  '/register': typeof StoreRegisterRoute
+  '/shop': typeof StoreShopRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/descriptions': typeof AdminDescriptionsRoute
+  '/admin/fraud': typeof AdminFraudRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pricing': typeof AdminPricingRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/recommendations': typeof AdminRecommendationsRoute
+  '/admin/refunds': typeof AdminRefundsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/': typeof StoreIndexRoute
+  '/admin': typeof AdminIndexRoute
+  '/product/$id': typeof StoreProductIdRoute
+  '/account': typeof StoreAccountIndexRoute
+  '/account/orders/$id': typeof StoreAccountOrdersIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_store': typeof StoreRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
+  '/_store/cart': typeof StoreCartRoute
+  '/_store/checkout': typeof StoreCheckoutRoute
+  '/_store/login': typeof StoreLoginRoute
+  '/_store/register': typeof StoreRegisterRoute
+  '/_store/shop': typeof StoreShopRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/descriptions': typeof AdminDescriptionsRoute
+  '/admin/fraud': typeof AdminFraudRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pricing': typeof AdminPricingRoute
+  '/admin/products': typeof AdminProductsRoute
+  '/admin/recommendations': typeof AdminRecommendationsRoute
+  '/admin/refunds': typeof AdminRefundsRoute
+  '/admin_/login': typeof AdminLoginRoute
+  '/_store/': typeof StoreIndexRoute
+  '/admin/': typeof AdminIndexRoute
+  '/_store/product/$id': typeof StoreProductIdRoute
+  '/_store/account/': typeof StoreAccountIndexRoute
+  '/_store/account/orders/$id': typeof StoreAccountOrdersIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/checkout'
+    | '/login'
+    | '/register'
+    | '/shop'
+    | '/admin/customers'
+    | '/admin/descriptions'
+    | '/admin/fraud'
+    | '/admin/orders'
+    | '/admin/payments'
+    | '/admin/pricing'
+    | '/admin/products'
+    | '/admin/recommendations'
+    | '/admin/refunds'
+    | '/admin/login'
+    | '/admin/'
+    | '/product/$id'
+    | '/account/'
+    | '/account/orders/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/cart'
+    | '/checkout'
+    | '/login'
+    | '/register'
+    | '/shop'
+    | '/admin/customers'
+    | '/admin/descriptions'
+    | '/admin/fraud'
+    | '/admin/orders'
+    | '/admin/payments'
+    | '/admin/pricing'
+    | '/admin/products'
+    | '/admin/recommendations'
+    | '/admin/refunds'
+    | '/admin/login'
+    | '/'
+    | '/admin'
+    | '/product/$id'
+    | '/account'
+    | '/account/orders/$id'
+  id:
+    | '__root__'
+    | '/_store'
+    | '/admin'
+    | '/_store/cart'
+    | '/_store/checkout'
+    | '/_store/login'
+    | '/_store/register'
+    | '/_store/shop'
+    | '/admin/customers'
+    | '/admin/descriptions'
+    | '/admin/fraud'
+    | '/admin/orders'
+    | '/admin/payments'
+    | '/admin/pricing'
+    | '/admin/products'
+    | '/admin/recommendations'
+    | '/admin/refunds'
+    | '/admin_/login'
+    | '/_store/'
+    | '/admin/'
+    | '/_store/product/$id'
+    | '/_store/account/'
+    | '/_store/account/orders/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  StoreRoute: typeof StoreRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
+  AdminLoginRoute: typeof AdminLoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_store': {
+      id: '/_store'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof StoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_store/': {
+      id: '/_store/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof StoreIndexRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/cart': {
+      id: '/_store/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof StoreCartRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/checkout': {
+      id: '/_store/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof StoreCheckoutRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/login': {
+      id: '/_store/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof StoreLoginRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/register': {
+      id: '/_store/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof StoreRegisterRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/shop': {
+      id: '/_store/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof StoreShopRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/customers': {
+      id: '/admin/customers'
+      path: '/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AdminCustomersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/descriptions': {
+      id: '/admin/descriptions'
+      path: '/descriptions'
+      fullPath: '/admin/descriptions'
+      preLoaderRoute: typeof AdminDescriptionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/fraud': {
+      id: '/admin/fraud'
+      path: '/fraud'
+      fullPath: '/admin/fraud'
+      preLoaderRoute: typeof AdminFraudRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/payments': {
+      id: '/admin/payments'
+      path: '/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pricing': {
+      id: '/admin/pricing'
+      path: '/pricing'
+      fullPath: '/admin/pricing'
+      preLoaderRoute: typeof AdminPricingRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/products': {
+      id: '/admin/products'
+      path: '/products'
+      fullPath: '/admin/products'
+      preLoaderRoute: typeof AdminProductsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/recommendations': {
+      id: '/admin/recommendations'
+      path: '/recommendations'
+      fullPath: '/admin/recommendations'
+      preLoaderRoute: typeof AdminRecommendationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/refunds': {
+      id: '/admin/refunds'
+      path: '/refunds'
+      fullPath: '/admin/refunds'
+      preLoaderRoute: typeof AdminRefundsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin_/login': {
+      id: '/admin_/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_store/account/': {
+      id: '/_store/account/'
+      path: '/account'
+      fullPath: '/account/'
+      preLoaderRoute: typeof StoreAccountIndexRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/product/$id': {
+      id: '/_store/product/$id'
+      path: '/product/$id'
+      fullPath: '/product/$id'
+      preLoaderRoute: typeof StoreProductIdRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/account/orders/$id': {
+      id: '/_store/account/orders/$id'
+      path: '/account/orders/$id'
+      fullPath: '/account/orders/$id'
+      preLoaderRoute: typeof StoreAccountOrdersIdRouteImport
+      parentRoute: typeof StoreRoute
     }
   }
 }
 
+interface StoreRouteChildren {
+  StoreCartRoute: typeof StoreCartRoute
+  StoreCheckoutRoute: typeof StoreCheckoutRoute
+  StoreLoginRoute: typeof StoreLoginRoute
+  StoreRegisterRoute: typeof StoreRegisterRoute
+  StoreShopRoute: typeof StoreShopRoute
+  StoreIndexRoute: typeof StoreIndexRoute
+  StoreProductIdRoute: typeof StoreProductIdRoute
+  StoreAccountIndexRoute: typeof StoreAccountIndexRoute
+  StoreAccountOrdersIdRoute: typeof StoreAccountOrdersIdRoute
+}
+
+const StoreRouteChildren: StoreRouteChildren = {
+  StoreCartRoute: StoreCartRoute,
+  StoreCheckoutRoute: StoreCheckoutRoute,
+  StoreLoginRoute: StoreLoginRoute,
+  StoreRegisterRoute: StoreRegisterRoute,
+  StoreShopRoute: StoreShopRoute,
+  StoreIndexRoute: StoreIndexRoute,
+  StoreProductIdRoute: StoreProductIdRoute,
+  StoreAccountIndexRoute: StoreAccountIndexRoute,
+  StoreAccountOrdersIdRoute: StoreAccountOrdersIdRoute,
+}
+
+const StoreRouteWithChildren = StoreRoute._addFileChildren(StoreRouteChildren)
+
+interface AdminRouteChildren {
+  AdminCustomersRoute: typeof AdminCustomersRoute
+  AdminDescriptionsRoute: typeof AdminDescriptionsRoute
+  AdminFraudRoute: typeof AdminFraudRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminPaymentsRoute: typeof AdminPaymentsRoute
+  AdminPricingRoute: typeof AdminPricingRoute
+  AdminProductsRoute: typeof AdminProductsRoute
+  AdminRecommendationsRoute: typeof AdminRecommendationsRoute
+  AdminRefundsRoute: typeof AdminRefundsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCustomersRoute: AdminCustomersRoute,
+  AdminDescriptionsRoute: AdminDescriptionsRoute,
+  AdminFraudRoute: AdminFraudRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminPaymentsRoute: AdminPaymentsRoute,
+  AdminPricingRoute: AdminPricingRoute,
+  AdminProductsRoute: AdminProductsRoute,
+  AdminRecommendationsRoute: AdminRecommendationsRoute,
+  AdminRefundsRoute: AdminRefundsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  StoreRoute: StoreRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
+  AdminLoginRoute: AdminLoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

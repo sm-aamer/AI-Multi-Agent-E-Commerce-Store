@@ -18,7 +18,15 @@ import { Route as StoreLoginRouteImport } from './routes/_store.login'
 import { Route as StoreRegisterRouteImport } from './routes/_store.register'
 import { Route as StoreShopRouteImport } from './routes/_store.shop'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCustomersRouteImport } from './routes/admin.customers'
+import { Route as AdminDescriptionsRouteImport } from './routes/admin.descriptions'
+import { Route as AdminFraudRouteImport } from './routes/admin.fraud'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
+import { Route as AdminPricingRouteImport } from './routes/admin.pricing'
 import { Route as AdminProductsRouteImport } from './routes/admin.products'
+import { Route as AdminRecommendationsRouteImport } from './routes/admin.recommendations'
+import { Route as AdminRefundsRouteImport } from './routes/admin.refunds'
 import { Route as AdminLoginRouteImport } from './routes/admin_.login'
 import { Route as StoreAccountIndexRouteImport } from './routes/_store.account.index'
 import { Route as StoreProductIdRouteImport } from './routes/_store.product.$id'
@@ -68,9 +76,49 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCustomersRoute = AdminCustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDescriptionsRoute = AdminDescriptionsRouteImport.update({
+  id: '/descriptions',
+  path: '/descriptions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFraudRoute = AdminFraudRouteImport.update({
+  id: '/fraud',
+  path: '/fraud',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPricingRoute = AdminPricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminProductsRoute = AdminProductsRouteImport.update({
   id: '/products',
   path: '/products',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRecommendationsRoute = AdminRecommendationsRouteImport.update({
+  id: '/recommendations',
+  path: '/recommendations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRefundsRoute = AdminRefundsRouteImport.update({
+  id: '/refunds',
+  path: '/refunds',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -102,7 +150,15 @@ export interface FileRoutesByFullPath {
   '/login': typeof StoreLoginRoute
   '/register': typeof StoreRegisterRoute
   '/shop': typeof StoreShopRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/descriptions': typeof AdminDescriptionsRoute
+  '/admin/fraud': typeof AdminFraudRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pricing': typeof AdminPricingRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/recommendations': typeof AdminRecommendationsRoute
+  '/admin/refunds': typeof AdminRefundsRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/': typeof AdminIndexRoute
   '/product/$id': typeof StoreProductIdRoute
@@ -115,7 +171,15 @@ export interface FileRoutesByTo {
   '/login': typeof StoreLoginRoute
   '/register': typeof StoreRegisterRoute
   '/shop': typeof StoreShopRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/descriptions': typeof AdminDescriptionsRoute
+  '/admin/fraud': typeof AdminFraudRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pricing': typeof AdminPricingRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/recommendations': typeof AdminRecommendationsRoute
+  '/admin/refunds': typeof AdminRefundsRoute
   '/admin/login': typeof AdminLoginRoute
   '/': typeof StoreIndexRoute
   '/admin': typeof AdminIndexRoute
@@ -132,7 +196,15 @@ export interface FileRoutesById {
   '/_store/login': typeof StoreLoginRoute
   '/_store/register': typeof StoreRegisterRoute
   '/_store/shop': typeof StoreShopRoute
+  '/admin/customers': typeof AdminCustomersRoute
+  '/admin/descriptions': typeof AdminDescriptionsRoute
+  '/admin/fraud': typeof AdminFraudRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/payments': typeof AdminPaymentsRoute
+  '/admin/pricing': typeof AdminPricingRoute
   '/admin/products': typeof AdminProductsRoute
+  '/admin/recommendations': typeof AdminRecommendationsRoute
+  '/admin/refunds': typeof AdminRefundsRoute
   '/admin_/login': typeof AdminLoginRoute
   '/_store/': typeof StoreIndexRoute
   '/admin/': typeof AdminIndexRoute
@@ -150,7 +222,15 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/shop'
+    | '/admin/customers'
+    | '/admin/descriptions'
+    | '/admin/fraud'
+    | '/admin/orders'
+    | '/admin/payments'
+    | '/admin/pricing'
     | '/admin/products'
+    | '/admin/recommendations'
+    | '/admin/refunds'
     | '/admin/login'
     | '/admin/'
     | '/product/$id'
@@ -163,7 +243,15 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/shop'
+    | '/admin/customers'
+    | '/admin/descriptions'
+    | '/admin/fraud'
+    | '/admin/orders'
+    | '/admin/payments'
+    | '/admin/pricing'
     | '/admin/products'
+    | '/admin/recommendations'
+    | '/admin/refunds'
     | '/admin/login'
     | '/'
     | '/admin'
@@ -179,7 +267,15 @@ export interface FileRouteTypes {
     | '/_store/login'
     | '/_store/register'
     | '/_store/shop'
+    | '/admin/customers'
+    | '/admin/descriptions'
+    | '/admin/fraud'
+    | '/admin/orders'
+    | '/admin/payments'
+    | '/admin/pricing'
     | '/admin/products'
+    | '/admin/recommendations'
+    | '/admin/refunds'
     | '/admin_/login'
     | '/_store/'
     | '/admin/'
@@ -259,11 +355,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/customers': {
+      id: '/admin/customers'
+      path: '/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AdminCustomersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/descriptions': {
+      id: '/admin/descriptions'
+      path: '/descriptions'
+      fullPath: '/admin/descriptions'
+      preLoaderRoute: typeof AdminDescriptionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/fraud': {
+      id: '/admin/fraud'
+      path: '/fraud'
+      fullPath: '/admin/fraud'
+      preLoaderRoute: typeof AdminFraudRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/payments': {
+      id: '/admin/payments'
+      path: '/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pricing': {
+      id: '/admin/pricing'
+      path: '/pricing'
+      fullPath: '/admin/pricing'
+      preLoaderRoute: typeof AdminPricingRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/products': {
       id: '/admin/products'
       path: '/products'
       fullPath: '/admin/products'
       preLoaderRoute: typeof AdminProductsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/recommendations': {
+      id: '/admin/recommendations'
+      path: '/recommendations'
+      fullPath: '/admin/recommendations'
+      preLoaderRoute: typeof AdminRecommendationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/refunds': {
+      id: '/admin/refunds'
+      path: '/refunds'
+      fullPath: '/admin/refunds'
+      preLoaderRoute: typeof AdminRefundsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin_/login': {
@@ -324,12 +476,28 @@ const StoreRouteChildren: StoreRouteChildren = {
 const StoreRouteWithChildren = StoreRoute._addFileChildren(StoreRouteChildren)
 
 interface AdminRouteChildren {
+  AdminCustomersRoute: typeof AdminCustomersRoute
+  AdminDescriptionsRoute: typeof AdminDescriptionsRoute
+  AdminFraudRoute: typeof AdminFraudRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminPaymentsRoute: typeof AdminPaymentsRoute
+  AdminPricingRoute: typeof AdminPricingRoute
   AdminProductsRoute: typeof AdminProductsRoute
+  AdminRecommendationsRoute: typeof AdminRecommendationsRoute
+  AdminRefundsRoute: typeof AdminRefundsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminCustomersRoute: AdminCustomersRoute,
+  AdminDescriptionsRoute: AdminDescriptionsRoute,
+  AdminFraudRoute: AdminFraudRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminPaymentsRoute: AdminPaymentsRoute,
+  AdminPricingRoute: AdminPricingRoute,
   AdminProductsRoute: AdminProductsRoute,
+  AdminRecommendationsRoute: AdminRecommendationsRoute,
+  AdminRefundsRoute: AdminRefundsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 

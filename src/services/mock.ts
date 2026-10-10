@@ -43,7 +43,7 @@ export const mockApi = {
     const user = state.customers.find((c) => c.email === email) ?? state.customers[0];
     return delay({ token: "mock-" + user.id, user: { ...user, email } });
   },
-  register: (name: string, email: string): Promise<Session> => {
+  register: (name: string, email: string, _password?: string): Promise<Session> => {
     if (state.customers.some((c) => c.email === email)) return Promise.reject(new ApiError(409, "An account with this email already exists."));
     const user: Customer = { id: `u${Date.now()}`, name, email, createdAt: new Date().toISOString().slice(0, 10), orders: 0, spent: 0, role: "customer" };
     state.customers.push(user);

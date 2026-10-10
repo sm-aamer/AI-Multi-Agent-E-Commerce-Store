@@ -13,7 +13,7 @@ const restApi: typeof mockApi = {
   saveProduct: (p) => (p.id ? http<Product>(`/products/${p.id}`, { method: "PUT", body: j(p) }) : http<Product>("/products", { method: "POST", body: j(p) })),
   deleteProduct: (id) => http<undefined>(`/products/${id}`, { method: "DELETE" }),
   login: (email, password, admin = false) => http<Session>(admin ? "/auth/admin/login" : "/auth/login", { method: "POST", body: j({ email, password }) }),
-  register: (name, email, ...rest: unknown[]) => http<Session>("/auth/register", { method: "POST", body: j({ name, email, password: rest[0] }) }),
+  register: (name, email, password) => http<Session>("/auth/register", { method: "POST", body: j({ name, email, password }) }),
   listOrders: (customerId) => http<Order[]>(customerId ? "/orders/me" : "/admin/orders"),
   getOrder: (id) => http<Order>(`/orders/${id}`),
   createOrder: (o) => http<Order>("/orders", { method: "POST", body: j(o) }),

@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/admin/AdminLayout";
 import { DataTable } from "@/components/admin/DataTable";
 
 export const Route = createFileRoute("/admin/customers")({
-  head: () => ({ meta: [{ title: "Customers — Maison Admin" }, { name: "description", content: "Customer list" }, { property: "og:title", content: "Customers — Maison Admin" }, { property: "og:description", content: "Customer list" }] }),
+  head: () => ({ meta: [{ title: "Customers — Trendora Admin" }, { name: "description", content: "Customer list" }, { property: "og:title", content: "Customers — Trendora Admin" }, { property: "og:description", content: "Customer list" }] }),
   component: Customers,
 });
 

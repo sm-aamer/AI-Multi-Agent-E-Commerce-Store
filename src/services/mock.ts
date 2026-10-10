@@ -1,21 +1,26 @@
 // In-memory mock implementation of the API. Changes reset on page reload.
 // Nothing here processes payments, verifies passwords, or persists to a database.
 import * as db from "@/mocks/data";
-import type { Customer, Order, Product, ProductQuery, RefundRequest, RequestStatus, Session } from "@/types";
+import type { Category, Customer, Order, Product, ProductQuery, RefundRequest, RequestStatus, Session } from "@/types";
 import { ApiError } from "./http";
 
 const delay = <T,>(v: T, ms = 450) => new Promise<T>((r) => setTimeout(() => r(structuredClone(v)), ms));
 const state = {
   products: [...db.products], orders: [...db.orders], customers: [...db.customers], refunds: [...db.refundRequests],
-  pricing: [...db.pricingSuggestions], descriptions: [...db.descriptionDrafts],
+  pricing: [...db.pricingSuggestions], descriptions: [...db.descriptionDrafts], categories: [...db.categories],
 };
 
 export const mockApi = {
-  listCategories: () => delay(db.categories),
+  listCategories: () => delay(state.categories),
+  saveCategory: (c: Category) => {
+    const i = state.categories.findIndex((x) => x.id === c.id);
+    if (i >= 0) state.categories[i] = c; else state.categories.push({ ...c, id: `c${Date.now()}` });
+    return delay(c);
+  },
   listProducts: (q: ProductQuery = {}) => {
     let list = state.products.filter((p) =>
       (!q.q || p.name.toLowerCase().includes(q.q.toLowerCase())) &&
-      (!q.category || db.categories.find((c) => c.slug === q.category)?.id === p.categoryId) &&
+      (!q.category || state.categories.find((c) => c.slug === q.category)?.id === p.categoryId) &&
       (q.minPrice === undefined || p.price >= q.minPrice) &&
       (q.maxPrice === undefined || p.price <= q.maxPrice));
     const s = q.sort ?? "featured";
@@ -41,6 +46,7 @@ export const mockApi = {
       return delay({ token: "mock-admin", user: { id: "a1", name: "Store Admin", email, createdAt: "2026-01-01", orders: 0, spent: 0, role: "admin" } });
     }
     const user = state.customers.find((c) => c.email === email) ?? state.customers[0];
+    if (!user) return Promise.reject(new ApiError(401, "No demo customer accounts available."));
     return delay({ token: "mock-" + user.id, user: { ...user, email } });
   },
   register: (name: string, email: string, _password?: string): Promise<Session> => {

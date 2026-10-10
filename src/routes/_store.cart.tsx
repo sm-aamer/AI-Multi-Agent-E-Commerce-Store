@@ -7,9 +7,9 @@ import { EmptyState, ErrorState, LoadingState } from "@/components/common/states
 export const Route = createFileRoute("/_store/cart")({
   head: () => ({
     meta: [
-      { title: "Your cart — Maison" },
+      { title: "Your cart — Trendora" },
       { name: "description", content: "Review items in your shopping cart." },
-      { property: "og:title", content: "Your cart — Maison" },
+      { property: "og:title", content: "Your cart — Trendora" },
       { property: "og:description", content: "Review items in your shopping cart." },
     ],
   }),
@@ -20,7 +20,10 @@ function CartPage() {
   const { cart, lines, subtotal, shipping, total, isLoading, error } = useCartLines();
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 md:px-8">
-      <h1 className="text-4xl">Your cart</h1>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <h1 className="text-[28px] md:text-[34px]">Your Bag</h1>
+        <Link to="/shop" className="text-sm font-medium text-accent underline underline-offset-4">Continue shopping</Link>
+      </div>
       {isLoading ? <LoadingState /> : error ? <ErrorState error={error} /> : lines.length === 0 ? (
         <div className="mt-8"><EmptyState title="Your cart is empty" body="Discover pieces you'll love." action={<Link to="/shop" className="btn btn-primary">Start shopping</Link>} /></div>
       ) : (
@@ -53,7 +56,8 @@ function CartPage() {
             <div className="flex justify-between"><span>Shipping</span><span>{shipping ? money(shipping) : "Free"}</span></div>
             {shipping > 0 && <p className="text-xs text-muted-foreground">Free shipping on orders over {money(FREE_SHIPPING_OVER)}.</p>}
             <div className="flex justify-between border-t pt-3 text-base font-semibold"><span>Total</span><span>{money(total)}</span></div>
-            <Link to="/checkout" className="btn btn-primary w-full">Checkout</Link>
+            <Link to="/checkout" className="btn btn-primary w-full">Proceed to Checkout</Link>
+            <Link to="/shop" className="btn btn-ghost w-full text-muted-foreground">Continue shopping</Link>
           </aside>
         </div>
       )}

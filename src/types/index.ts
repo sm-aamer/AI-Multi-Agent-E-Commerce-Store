@@ -1,6 +1,6 @@
 // Domain types — mirror these with Pydantic schemas in the FastAPI backend.
 
-export type Category = { id: string; name: string; slug: string; image: string };
+export type Category = { id: string; name: string; slug: string; image: string; blurb?: string };
 
 export type Product = {
   id: string;
@@ -13,8 +13,11 @@ export type Product = {
   stock: number;
   image: string;
   rating: number;
+  reviewCount?: number;
   featured?: boolean;
+  isNew?: boolean;
   sizes?: string[];
+  material?: string;
 };
 
 export type CartItem = { productId: string; quantity: number; size?: string };
@@ -55,7 +58,7 @@ export type RefundRequest = { id: string; orderId: string; customerName: string;
 
 export type AIRecommendation = { id: string; title: string; detail: string; productIds: string[]; confidence: number };
 export type PricingSuggestion = { id: string; productId: string; currentPrice: number; competitorAvg: number; suggestedPrice: number; rationale: string; status: RequestStatus };
-export type DescriptionDraft = { id: string; productId: string; current: string; generated: string; status: RequestStatus };
+export type DescriptionDraft = { id: string; productId: string; current: string; generated: string; seoTitle?: string; seoDescription?: string; status: RequestStatus };
 
 export type ProductQuery = { q?: string; category?: string; minPrice?: number; maxPrice?: number; sort?: "featured" | "price-asc" | "price-desc" | "rating" | "newest" };
 

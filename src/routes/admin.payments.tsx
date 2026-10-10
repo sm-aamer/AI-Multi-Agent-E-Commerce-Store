@@ -10,7 +10,7 @@ import { StatusBadge } from "@/components/common/states";
 import type { PaymentStatus } from "@/types";
 
 export const Route = createFileRoute("/admin/payments")({
-  head: () => ({ meta: [{ title: "Bank transfers — Maison Admin" }, { name: "description", content: "Verify bank transfers" }, { property: "og:title", content: "Bank transfers — Maison Admin" }, { property: "og:description", content: "Verify bank transfers" }] }),
+  head: () => ({ meta: [{ title: "Bank transfers — Trendora Admin" }, { name: "description", content: "Verify bank transfers" }, { property: "og:title", content: "Bank transfers — Trendora Admin" }, { property: "og:description", content: "Verify bank transfers" }] }),
   component: Payments,
 });
 

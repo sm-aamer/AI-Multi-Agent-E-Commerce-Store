@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { Session } from "@/types";
 import { tokenStore } from "@/services/http";
 
-const KEY = "aiecom.session";
+const KEY = "trendora.session";
 type Ctx = { session: Session | null; ready: boolean; signIn: (s: Session) => void; signOut: () => void };
 const AuthContext = createContext<Ctx | null>(null);
 

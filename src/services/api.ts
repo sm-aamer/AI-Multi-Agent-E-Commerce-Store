@@ -8,6 +8,7 @@ const j = (b: unknown) => JSON.stringify(b);
 
 const restApi: typeof mockApi = {
   listCategories: () => http<Category[]>("/categories"),
+  saveCategory: (c) => (c.id ? http<Category>(`/categories/${c.id}`, { method: "PUT", body: j(c) }) : http<Category>("/categories", { method: "POST", body: j(c) })),
   listProducts: (q = {}) => http<Product[]>(`/products${qs(q as ProductQuery)}`),
   getProduct: (id) => http<Product>(`/products/${id}`),
   saveProduct: (p) => (p.id ? http<Product>(`/products/${p.id}`, { method: "PUT", body: j(p) }) : http<Product>("/products", { method: "POST", body: j(p) })),

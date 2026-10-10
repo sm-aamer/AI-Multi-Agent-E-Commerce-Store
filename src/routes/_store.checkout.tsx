@@ -1,15 +1,16 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
-import { Banknote, Landmark } from "lucide-react";
+import { Banknote, CheckCircle2, Landmark } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/services/api";
 import { useAuth } from "@/store/auth";
 import { useCartLines } from "@/hooks/use-cart-lines";
 import { money } from "@/lib/format";
 import { EmptyState, FieldError, LoadingState } from "@/components/common/states";
+import type { Order } from "@/types";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Enter your full name").max(100),
@@ -27,9 +28,9 @@ type Form = z.infer<typeof schema>;
 export const Route = createFileRoute("/_store/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout — Maison" },
+      { title: "Checkout — Trendora" },
       { name: "description", content: "Enter delivery details and choose Bank Transfer or Cash on Delivery." },
-      { property: "og:title", content: "Checkout — Maison" },
+      { property: "og:title", content: "Checkout — Trendora" },
       { property: "og:description", content: "Secure checkout with Bank Transfer or COD." },
     ],
   }),
@@ -39,14 +40,15 @@ export const Route = createFileRoute("/_store/checkout")({
 function Checkout() {
   const { session } = useAuth();
   const { cart, lines, subtotal, shipping, total, isLoading } = useCartLines();
-  const navigate = useNavigate();
   const [submitError, setSubmitError] = useState("");
+  const [placed, setPlaced] = useState<Order | null>(null);
   const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<Form>({
     resolver: zodResolver(schema),
     defaultValues: { paymentMethod: "cod", country: "Pakistan", name: session?.user.name ?? "", email: session?.user.email ?? "" },
   });
   const method = watch("paymentMethod");
 
+  if (placed) return <OrderConfirmation order={placed} signedIn={Boolean(session)} />;
   if (isLoading) return <LoadingState />;
   if (lines.length === 0) return <div className="mx-auto max-w-xl px-4 py-20"><EmptyState title="Nothing to check out" action={<Link to="/shop" className="btn btn-primary">Go shopping</Link>} /></div>;
 
@@ -60,8 +62,8 @@ function Checkout() {
         subtotal, shipping, total, paymentMethod: f.paymentMethod, bankReference: f.bankReference,
       });
       cart.clear();
+      setPlaced(order);
       toast.success(`Order ${order.id} placed`);
-      navigate({ to: "/account/orders/$id", params: { id: order.id } });
     } catch (e) {
       setSubmitError(e instanceof Error ? e.message : "Could not place order");
     }
@@ -108,8 +110,8 @@ function Checkout() {
           </div>
           {method === "bank_transfer" && (
             <div className="panel mt-4 space-y-3 bg-secondary p-4 text-sm">
-              <p className="font-semibold">Bank details (sample)</p>
-              <p className="text-muted-foreground">Account: Maison Retail · IBAN PK00 DEMO 0000 0000 0000 · Bank: Demo Bank</p>
+              <p className="font-semibold">Bank details (configurable placeholder)</p>
+              <p className="text-muted-foreground">Account: Trendora Retail · IBAN PK00 DEMO 0000 0000 0000 · Bank: Demo Bank</p>
               <div>
                 <label className="font-medium" htmlFor="bankReference">Transfer reference / transaction ID</label>
                 <input id="bankReference" className="field mt-1" {...register("bankReference")} />
@@ -132,5 +134,43 @@ function Checkout() {
         <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full">{isSubmitting ? "Placing order…" : "Place order"}</button>
       </aside>
     </form>
+  );
+}
+
+function OrderConfirmation({ order, signedIn }: { order: Order; signedIn: boolean }) {
+  return (
+    <div className="mx-auto max-w-xl px-4 py-16">
+      <div className="panel p-8 text-center">
+        <CheckCircle2 className="mx-auto h-12 w-12 text-success" />
+        <h1 className="mt-4 text-[26px]">Order placed</h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Thank you, {order.customerName.split(" ")[0]}! Your order <span className="font-semibold text-foreground">{order.id}</span> has been received.
+        </p>
+        <div className="mt-6 space-y-1.5 rounded-lg bg-secondary p-4 text-left text-sm">
+          <div className="flex justify-between"><span>Total</span><span className="font-semibold">{money(order.total)}</span></div>
+          <div className="flex justify-between"><span>Payment</span><span>{order.paymentMethod === "cod" ? "Cash on Delivery" : "Bank Transfer"}</span></div>
+          {order.paymentMethod === "bank_transfer" ? (
+            <p className="pt-1 text-xs text-muted-foreground">
+              Please transfer {money(order.total)} to Demo Bank (IBAN PK00 DEMO 0000 0000 0000) using reference
+              <span className="font-semibold text-foreground"> {order.id}</span>. Our team verifies transfers before shipping.
+            </p>
+          ) : (
+            <p className="pt-1 text-xs text-muted-foreground">Pay {money(order.total)} in cash when your order arrives.</p>
+          )}
+        </div>
+        <p className="mt-4 text-xs text-muted-foreground">Demo order — nothing has been saved to a real database.</p>
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
+          {signedIn && (
+            <Link to="/account/orders/$id" params={{ id: order.id }} className="btn btn-primary">View order details</Link>
+          )}
+          <Link to="/shop" className="btn btn-outline">Continue shopping</Link>
+        </div>
+        {!signedIn && (
+          <p className="mt-4 text-xs text-muted-foreground">
+            <Link to="/login" className="underline">Sign in</Link> to track this order and request refunds.
+          </p>
+        )}
+      </div>
+    </div>
   );
 }

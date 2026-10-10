@@ -54,7 +54,7 @@ export function MockBanner() {
   if (!USE_MOCK) return null;
   return (
     <div className="bg-warning/20 px-4 py-1.5 text-center text-xs text-foreground">
-      Prototype mode — mock data only. Payments, sign-in and saved data are not real until the backend is connected.
+Prototype mode — Trendora demo data only. Payments, sign-in and saved orders are not real until the backend is connected.
     </div>
   );
 }

@@ -9,9 +9,9 @@ import { EmptyState, ErrorState, LoadingState, StatusBadge } from "@/components/
 export const Route = createFileRoute("/_store/account/")({
   head: () => ({
     meta: [
-      { title: "My orders — Maison" },
+      { title: "My orders — Trendora" },
       { name: "description", content: "Your order history." },
-      { property: "og:title", content: "My orders — Maison" },
+      { property: "og:title", content: "My orders — Trendora" },
       { property: "og:description", content: "Your order history." },
     ],
   }),

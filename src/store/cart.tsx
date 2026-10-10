@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { CartItem } from "@/types";
 
-const KEY = "aiecom.cart";
+const KEY = "trendora.cart";
 type Ctx = {
   items: CartItem[];
   add: (productId: string, quantity?: number, size?: string) => void;

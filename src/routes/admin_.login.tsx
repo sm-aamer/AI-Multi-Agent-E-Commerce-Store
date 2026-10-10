@@ -7,9 +7,9 @@ import { useAuth } from "@/store/auth";
 export const Route = createFileRoute("/admin_/login")({
   head: () => ({
     meta: [
-      { title: "Admin sign in — Maison" },
-      { name: "description", content: "Staff sign in for the Maison admin dashboard." },
-      { property: "og:title", content: "Admin sign in — Maison" },
+      { title: "Admin sign in — Trendora" },
+      { name: "description", content: "Staff sign in for the Trendora admin dashboard." },
+      { property: "og:title", content: "Admin sign in — Trendora" },
       { property: "og:description", content: "Staff sign in." },
       { name: "robots", content: "noindex" },
     ],
@@ -25,7 +25,7 @@ function AdminLogin() {
       <MockBanner />
       <div className="flex flex-1 items-center justify-center px-4">
         <div className="panel w-full max-w-sm p-8">
-          <p className="font-display text-2xl">Maison <span className="text-sm text-muted-foreground">Admin</span></p>
+          <p className="font-display text-2xl">Trendora <span className="text-sm text-muted-foreground">Admin</span></p>
           <h1 className="mb-6 mt-4 text-2xl">Staff sign in</h1>
           <AuthForm
             mode="login"

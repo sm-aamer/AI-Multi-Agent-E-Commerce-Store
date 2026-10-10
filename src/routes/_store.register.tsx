@@ -6,10 +6,10 @@ import { useAuth } from "@/store/auth";
 export const Route = createFileRoute("/_store/register")({
   head: () => ({
     meta: [
-      { title: "Create account — Maison" },
-      { name: "description", content: "Create a Maison account." },
-      { property: "og:title", content: "Create account — Maison" },
-      { property: "og:description", content: "Join Maison to track your orders." },
+      { title: "Create account — Trendora" },
+      { name: "description", content: "Create a Trendora account." },
+      { property: "og:title", content: "Create account — Trendora" },
+      { property: "og:description", content: "Join Trendora to track your orders." },
     ],
   }),
   component: Register,

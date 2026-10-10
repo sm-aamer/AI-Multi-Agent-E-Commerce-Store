@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as StoreRouteImport } from './routes/_store'
 import { Route as StoreIndexRouteImport } from './routes/_store.index'
+import { Route as StoreCartRouteImport } from './routes/_store.cart'
+import { Route as StoreCheckoutRouteImport } from './routes/_store.checkout'
+import { Route as StoreShopRouteImport } from './routes/_store.shop'
+import { Route as StoreProductIdRouteImport } from './routes/_store.product.$id'
 
 const StoreRoute = StoreRouteImport.update({
   id: '/_store',
@@ -21,24 +25,63 @@ const StoreIndexRoute = StoreIndexRouteImport.update({
   path: '/',
   getParentRoute: () => StoreRoute,
 } as any)
+const StoreCartRoute = StoreCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreCheckoutRoute = StoreCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreShopRoute = StoreShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreProductIdRoute = StoreProductIdRouteImport.update({
+  id: '/product/$id',
+  path: '/product/$id',
+  getParentRoute: () => StoreRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof StoreIndexRoute
+  '/cart': typeof StoreCartRoute
+  '/checkout': typeof StoreCheckoutRoute
+  '/shop': typeof StoreShopRoute
+  '/product/$id': typeof StoreProductIdRoute
 }
 export interface FileRoutesByTo {
+  '/cart': typeof StoreCartRoute
+  '/checkout': typeof StoreCheckoutRoute
+  '/shop': typeof StoreShopRoute
   '/': typeof StoreIndexRoute
+  '/product/$id': typeof StoreProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_store': typeof StoreRouteWithChildren
+  '/_store/cart': typeof StoreCartRoute
+  '/_store/checkout': typeof StoreCheckoutRoute
+  '/_store/shop': typeof StoreShopRoute
   '/_store/': typeof StoreIndexRoute
+  '/_store/product/$id': typeof StoreProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cart' | '/checkout' | '/shop' | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_store' | '/_store/'
+  to: '/cart' | '/checkout' | '/shop' | '/' | '/product/$id'
+  id:
+    | '__root__'
+    | '/_store'
+    | '/_store/cart'
+    | '/_store/checkout'
+    | '/_store/shop'
+    | '/_store/'
+    | '/_store/product/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -61,15 +104,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StoreIndexRouteImport
       parentRoute: typeof StoreRoute
     }
+    '/_store/cart': {
+      id: '/_store/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof StoreCartRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/checkout': {
+      id: '/_store/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof StoreCheckoutRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/shop': {
+      id: '/_store/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof StoreShopRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/product/$id': {
+      id: '/_store/product/$id'
+      path: '/product/$id'
+      fullPath: '/product/$id'
+      preLoaderRoute: typeof StoreProductIdRouteImport
+      parentRoute: typeof StoreRoute
+    }
   }
 }
 
 interface StoreRouteChildren {
+  StoreCartRoute: typeof StoreCartRoute
+  StoreCheckoutRoute: typeof StoreCheckoutRoute
+  StoreShopRoute: typeof StoreShopRoute
   StoreIndexRoute: typeof StoreIndexRoute
+  StoreProductIdRoute: typeof StoreProductIdRoute
 }
 
 const StoreRouteChildren: StoreRouteChildren = {
+  StoreCartRoute: StoreCartRoute,
+  StoreCheckoutRoute: StoreCheckoutRoute,
+  StoreShopRoute: StoreShopRoute,
   StoreIndexRoute: StoreIndexRoute,
+  StoreProductIdRoute: StoreProductIdRoute,
 }
 
 const StoreRouteWithChildren = StoreRoute._addFileChildren(StoreRouteChildren)

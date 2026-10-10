@@ -68,7 +68,7 @@ function Checkout() {
   };
 
   const F = ({ name, label, type = "text", span }: { name: keyof Form; label: string; type?: string; span?: boolean }) => (
-    <div className={span ? "sm:col-span-2" : ""}>
+    <div key={name} className={span ? "sm:col-span-2" : ""}>
       <label className="text-sm font-medium" htmlFor={name}>{label}</label>
       <input id={name} type={type} className="field mt-1" {...register(name)} />
       <FieldError message={errors[name]?.message} />
@@ -82,18 +82,18 @@ function Checkout() {
         <section>
           <h2 className="mb-4 text-xl">Customer details</h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <F name="name" label="Full name" span />
-            <F name="email" label="Email" type="email" />
-            <F name="phone" label="Phone" type="tel" />
+            {F({ name: "name", label: "Full name", span: true })}
+            {F({ name: "email", label: "Email", type: "email" })}
+            {F({ name: "phone", label: "Phone", type: "tel" })}
           </div>
         </section>
         <section>
           <h2 className="mb-4 text-xl">Delivery address</h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <F name="line1" label="Street address" span />
-            <F name="city" label="City" />
-            <F name="postalCode" label="Postal code" />
-            <F name="country" label="Country" span />
+            {F({ name: "line1", label: "Street address", span: true })}
+            {F({ name: "city", label: "City" })}
+            {F({ name: "postalCode", label: "Postal code" })}
+            {F({ name: "country", label: "Country", span: true })}
           </div>
         </section>
         <section>

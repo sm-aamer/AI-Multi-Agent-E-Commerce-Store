@@ -8,7 +8,7 @@ import { AgentNotice, PageHeader } from "@/components/admin/AdminLayout";
 import { EmptyState, ErrorState, LoadingState, StatusBadge } from "@/components/common/states";
 
 export const Route = createFileRoute("/admin/fraud")({
-  head: () => ({ meta: [{ title: "Fraud review — Trendora Admin" }, { name: "description", content: "Review flagged orders" }, { property: "og:title", content: "Fraud review — Trendora Admin" }, { property: "og:description", content: "Review flagged orders" }] }),
+  head: () => ({ meta: [{ title: "Fraud review — Velloria Classic Admin" }, { name: "description", content: "Review flagged orders" }, { property: "og:title", content: "Fraud review — Velloria Classic Admin" }, { property: "og:description", content: "Review flagged orders" }] }),
   component: Fraud,
 });
 

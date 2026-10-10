@@ -8,10 +8,10 @@ import { ErrorState, SkeletonGrid } from "@/components/common/states";
 export const Route = createFileRoute("/_store/collections")({
   head: () => ({
     meta: [
-      { title: "Collections — Trendora" },
-      { name: "description", content: "Browse the Trendora edit — women's, men's, footwear and accessories." },
-      { property: "og:title", content: "Collections — Trendora" },
-      { property: "og:description", content: "Browse the Trendora edit." },
+      { title: "Collections — Velloria Classic" },
+      { name: "description", content: "Browse the Velloria Classic edit — women's, men's, footwear and accessories." },
+      { property: "og:title", content: "Collections — Velloria Classic" },
+      { property: "og:description", content: "Browse the Velloria Classic edit." },
     ],
   }),
   component: Collections,
@@ -27,7 +27,7 @@ function Collections() {
       <p className="eyebrow">Curated edits</p>
       <h1 className="mt-2 text-[28px] md:text-[34px]">Collections</h1>
       <p className="mt-1 max-w-xl text-sm text-muted-foreground">
-        Every Trendora collection is hand-checked for quality and fit. Start with a category, or explore the full edit.
+        Every Velloria Classic collection is hand-checked for quality and fit. Start with a category, or explore the full edit.
       </p>
 
       {cats.isError ? (

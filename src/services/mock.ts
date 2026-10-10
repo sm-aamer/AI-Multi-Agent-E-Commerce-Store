@@ -1,7 +1,7 @@
 // In-memory mock implementation of the API. Changes reset on page reload.
 // Nothing here processes payments, verifies passwords, or persists to a database.
 import * as db from "@/mocks/data";
-import type { Category, Customer, Order, Product, ProductQuery, RefundRequest, RequestStatus, Session } from "@/types";
+import type { Category, Customer, FeedbackInput, Order, Product, ProductQuery, RefundRequest, RequestStatus, Session } from "@/types";
 import { ApiError } from "./http";
 
 const delay = <T,>(v: T, ms = 450) => new Promise<T>((r) => setTimeout(() => r(structuredClone(v)), ms));
@@ -11,6 +11,8 @@ const state = {
 };
 
 export const mockApi = {
+  // Simulated only — nothing is persisted. Replace with POST /feedback on the FastAPI backend.
+  submitFeedback: (_f: FeedbackInput) => delay({ ok: true }, 700),
   listCategories: () => delay(state.categories),
   saveCategory: (c: Category) => {
     const i = state.categories.findIndex((x) => x.id === c.id);

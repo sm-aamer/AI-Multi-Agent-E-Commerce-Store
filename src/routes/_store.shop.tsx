@@ -21,10 +21,10 @@ export const Route = createFileRoute("/_store/shop")({
   validateSearch: schema,
   head: () => ({
     meta: [
-      { title: "Shop all — Trendora" },
-      { name: "description", content: "Browse the full Trendora collection. Filter by category and price." },
-      { property: "og:title", content: "Shop all — Trendora" },
-      { property: "og:description", content: "Browse and filter the full Trendora collection." },
+      { title: "Shop all — Velloria Classic" },
+      { name: "description", content: "Browse the full Velloria Classic collection. Filter by category and price." },
+      { property: "og:title", content: "Shop all — Velloria Classic" },
+      { property: "og:description", content: "Browse and filter the full Velloria Classic collection." },
     ],
   }),
   component: Shop,
@@ -32,9 +32,9 @@ export const Route = createFileRoute("/_store/shop")({
 
 const priceRanges: { label: string; min?: number; max?: number }[] = [
   { label: "Any price" },
-  { label: "Under Rs 10,000", max: 9999 },
-  { label: "Rs 10,000 – Rs 20,000", min: 10000, max: 20000 },
-  { label: "Over Rs 20,000", min: 20001 },
+  { label: "Under $50", max: 49 },
+  { label: "$50 – $150", min: 50, max: 150 },
+  { label: "Over $150", min: 151 },
 ];
 
 function FilterPanel({

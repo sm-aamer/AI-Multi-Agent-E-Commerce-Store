@@ -2,7 +2,7 @@
 export const API_BASE_URL = import.meta.env["VITE_API_BASE_URL"] ?? "http://localhost:8000/api/v1";
 export const USE_MOCK = import.meta.env["VITE_USE_MOCK_API"] !== "false";
 
-const TOKEN_KEY = "trendora.token";
+const TOKEN_KEY = "velloria.token";
 export const tokenStore = {
   get: () => (typeof window === "undefined" ? null : localStorage.getItem(TOKEN_KEY)),
   set: (t: string | null) => (t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY)),

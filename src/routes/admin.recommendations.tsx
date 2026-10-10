@@ -5,7 +5,7 @@ import { AgentNotice, PageHeader } from "@/components/admin/AdminLayout";
 import { EmptyState, ErrorState, LoadingState } from "@/components/common/states";
 
 export const Route = createFileRoute("/admin/recommendations")({
-  head: () => ({ meta: [{ title: "AI recommendations — Trendora Admin" }, { name: "description", content: "AI merchandising recommendations" }, { property: "og:title", content: "AI recommendations — Trendora Admin" }, { property: "og:description", content: "AI merchandising recommendations" }] }),
+  head: () => ({ meta: [{ title: "AI recommendations — Velloria Classic Admin" }, { name: "description", content: "AI merchandising recommendations" }, { property: "og:title", content: "AI recommendations — Velloria Classic Admin" }, { property: "og:description", content: "AI merchandising recommendations" }] }),
   component: Recs,
 });
 

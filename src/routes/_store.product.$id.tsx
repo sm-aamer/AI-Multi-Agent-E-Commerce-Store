@@ -14,9 +14,9 @@ import hero from "@/assets/hero.jpg";
 export const Route = createFileRoute("/_store/product/$id")({
   head: () => ({
     meta: [
-      { title: "Product details — Trendora" },
-      { name: "description", content: "Product details, sizing and availability at Trendora." },
-      { property: "og:title", content: "Product details — Trendora" },
+      { title: "Product details — Velloria Classic" },
+      { name: "description", content: "Product details, sizing and availability at Velloria Classic." },
+      { property: "og:title", content: "Product details — Velloria Classic" },
       { property: "og:description", content: "Product details, sizing and availability." },
     ],
   }),
@@ -169,7 +169,7 @@ function ProductPage() {
           <div className="panel mt-8 divide-y text-sm">
             <div className="flex items-center gap-3 p-4">
               <Truck className="h-4 w-4 shrink-0 text-accent" />
-              <p>Free delivery on orders over Rs 25,000 · Cash on Delivery available</p>
+              <p>Free delivery on orders over $250 · Cash on Delivery available</p>
             </div>
             {p.material && (
               <div className="p-4">

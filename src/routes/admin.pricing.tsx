@@ -10,7 +10,7 @@ import { StatusBadge } from "@/components/common/states";
 import type { RequestStatus } from "@/types";
 
 export const Route = createFileRoute("/admin/pricing")({
-  head: () => ({ meta: [{ title: "Competitor pricing — Trendora Admin" }, { name: "description", content: "AI pricing suggestions" }, { property: "og:title", content: "Competitor pricing — Trendora Admin" }, { property: "og:description", content: "AI pricing suggestions" }] }),
+  head: () => ({ meta: [{ title: "Competitor pricing — Velloria Classic Admin" }, { name: "description", content: "AI pricing suggestions" }, { property: "og:title", content: "Competitor pricing — Velloria Classic Admin" }, { property: "og:description", content: "AI pricing suggestions" }] }),
   component: Pricing,
 });
 

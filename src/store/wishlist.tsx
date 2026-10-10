@@ -1,7 +1,7 @@
 // Wishlist — saved locally in the browser (prototype, no backend).
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
-const KEY = "trendora.wishlist";
+const KEY = "velloria.wishlist";
 type Ctx = {
   ids: string[];
   has: (productId: string) => boolean;

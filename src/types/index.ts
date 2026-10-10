@@ -63,3 +63,5 @@ export type DescriptionDraft = { id: string; productId: string; current: string;
 export type ProductQuery = { q?: string; category?: string; minPrice?: number; maxPrice?: number; sort?: "featured" | "price-asc" | "price-desc" | "rating" | "newest" };
 
 export type Session = { token: string; user: Customer };
+
+export type FeedbackInput = { name: string; email: string; rating: number; message: string; orderId?: string };

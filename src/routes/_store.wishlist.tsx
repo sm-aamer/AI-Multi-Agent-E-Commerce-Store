@@ -9,9 +9,9 @@ import { EmptyState, ErrorState, SkeletonGrid } from "@/components/common/states
 export const Route = createFileRoute("/_store/wishlist")({
   head: () => ({
     meta: [
-      { title: "Wishlist — Trendora" },
+      { title: "Wishlist — Velloria Classic" },
       { name: "description", content: "Products you've saved for later." },
-      { property: "og:title", content: "Wishlist — Trendora" },
+      { property: "og:title", content: "Wishlist — Velloria Classic" },
       { property: "og:description", content: "Products you've saved for later." },
     ],
   }),

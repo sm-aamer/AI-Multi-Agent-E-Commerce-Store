@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import type { Order, OrderStatus } from "@/types";
 
 export const Route = createFileRoute("/admin/orders")({
-  head: () => ({ meta: [{ title: "Orders — Trendora Admin" }, { name: "description", content: "Manage orders" }, { property: "og:title", content: "Orders — Trendora Admin" }, { property: "og:description", content: "Manage orders" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Orders — Velloria Classic Admin" }, { name: "description", content: "Manage orders" }, { property: "og:title", content: "Orders — Velloria Classic Admin" }, { property: "og:description", content: "Manage orders" }, { name: "robots", content: "noindex" }] }),
   component: Orders,
 });
 const statuses: OrderStatus[] = ["pending", "confirmed", "shipped", "delivered", "cancelled"];

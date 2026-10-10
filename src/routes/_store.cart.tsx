@@ -7,9 +7,9 @@ import { EmptyState, ErrorState, LoadingState } from "@/components/common/states
 export const Route = createFileRoute("/_store/cart")({
   head: () => ({
     meta: [
-      { title: "Your cart — Trendora" },
+      { title: "Your cart — Velloria Classic" },
       { name: "description", content: "Review items in your shopping cart." },
-      { property: "og:title", content: "Your cart — Trendora" },
+      { property: "og:title", content: "Your cart — Velloria Classic" },
       { property: "og:description", content: "Review items in your shopping cart." },
     ],
   }),

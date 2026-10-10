@@ -3,8 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/_store/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy — Trendora" },
-      { name: "description", content: "How Trendora handles your information." },
+      { title: "Privacy — Velloria Classic" },
+      { name: "description", content: "How Velloria Classic handles your information." },
     ],
   }),
   component: () => (
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/_store/privacy")({
       <p className="mt-1 text-xs text-muted-foreground">Last updated: October 2026 · Prototype policy text</p>
       <div className="prose-sm mt-6 space-y-4 text-sm text-muted-foreground">
         <p>
-          Trendora (this prototype) collects only the information you enter at checkout or registration — your name,
+          Velloria Classic (this prototype) collects only the information you enter at checkout or registration — your name,
           email, phone and delivery address — to place and track orders.
         </p>
         <p>
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/_store/privacy")({
         <p>
           When connected to the production backend, order data will be stored securely and used only to fulfil your
           orders, provide support and — with your consent — send newsletter updates. You may request deletion of your
-          account and order history at any time by contacting support@trendora.pk.
+          account and order history at any time by contacting support@velloriaclassic.com.
         </p>
         <p>We do not sell customer data to third parties.</p>
       </div>

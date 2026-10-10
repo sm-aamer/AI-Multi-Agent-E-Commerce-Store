@@ -39,7 +39,7 @@ export function AdminLayout() {
   if (session?.user.role !== "admin") {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
-        <div className="text-center"><h1 className="text-3xl">Admin access required</h1><p className="mt-2 text-sm text-muted-foreground">Sign in with a Trendora staff account to continue.</p>
+        <div className="text-center"><h1 className="text-3xl">Admin access required</h1><p className="mt-2 text-sm text-muted-foreground">Sign in with a Velloria Classic staff account to continue.</p>
           <Link to="/admin/login" className="btn btn-primary mt-6">Admin sign in</Link></div>
       </div>
     );
@@ -47,7 +47,7 @@ export function AdminLayout() {
 
   const sidebar = (
     <nav className="flex h-full flex-col gap-6 overflow-y-auto p-4">
-      <Link to="/admin" className="px-2 font-display text-2xl font-extrabold text-white">Trendora <span className="text-xs font-sans font-medium text-sidebar-foreground/60">Admin</span></Link>
+      <Link to="/admin" className="px-2 font-display text-2xl font-extrabold text-white">Velloria Classic <span className="text-xs font-sans font-medium text-sidebar-foreground/60">Admin</span></Link>
       {groups.map((g) => (
         <div key={g.title}>
           <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-sidebar-foreground/50">{g.title}</p>
@@ -76,7 +76,7 @@ export function AdminLayout() {
         <div className="min-w-0 flex-1">
           <header className="flex h-14 items-center gap-3 border-b bg-card px-4 md:px-8">
             <button className="lg:hidden" onClick={() => setOpen(true)} aria-label="Menu">{open ? <X /> : <Menu />}</button>
-            <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-foreground lg:hidden">Trendora Admin</Link>
+            <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-foreground lg:hidden">Velloria Classic Admin</Link>
             <p className="ml-auto text-sm text-muted-foreground">{session.user.email}</p>
           </header>
           <main className="p-4 md:p-8"><Outlet /></main>

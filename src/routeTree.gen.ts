@@ -16,6 +16,7 @@ import { Route as StoreAboutRouteImport } from './routes/_store.about'
 import { Route as StoreCartRouteImport } from './routes/_store.cart'
 import { Route as StoreCheckoutRouteImport } from './routes/_store.checkout'
 import { Route as StoreCollectionsRouteImport } from './routes/_store.collections'
+import { Route as StoreFeedbackRouteImport } from './routes/_store.feedback'
 import { Route as StoreLoginRouteImport } from './routes/_store.login'
 import { Route as StorePrivacyRouteImport } from './routes/_store.privacy'
 import { Route as StoreRegisterRouteImport } from './routes/_store.register'
@@ -71,6 +72,11 @@ const StoreCheckoutRoute = StoreCheckoutRouteImport.update({
 const StoreCollectionsRoute = StoreCollectionsRouteImport.update({
   id: '/collections',
   path: '/collections',
+  getParentRoute: () => StoreRoute,
+} as any)
+const StoreFeedbackRoute = StoreFeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
   getParentRoute: () => StoreRoute,
 } as any)
 const StoreLoginRoute = StoreLoginRouteImport.update({
@@ -191,6 +197,7 @@ export interface FileRoutesByFullPath {
   '/cart': typeof StoreCartRoute
   '/checkout': typeof StoreCheckoutRoute
   '/collections': typeof StoreCollectionsRoute
+  '/feedback': typeof StoreFeedbackRoute
   '/login': typeof StoreLoginRoute
   '/privacy': typeof StorePrivacyRoute
   '/register': typeof StoreRegisterRoute
@@ -219,6 +226,7 @@ export interface FileRoutesByTo {
   '/cart': typeof StoreCartRoute
   '/checkout': typeof StoreCheckoutRoute
   '/collections': typeof StoreCollectionsRoute
+  '/feedback': typeof StoreFeedbackRoute
   '/login': typeof StoreLoginRoute
   '/privacy': typeof StorePrivacyRoute
   '/register': typeof StoreRegisterRoute
@@ -251,6 +259,7 @@ export interface FileRoutesById {
   '/_store/cart': typeof StoreCartRoute
   '/_store/checkout': typeof StoreCheckoutRoute
   '/_store/collections': typeof StoreCollectionsRoute
+  '/_store/feedback': typeof StoreFeedbackRoute
   '/_store/login': typeof StoreLoginRoute
   '/_store/privacy': typeof StorePrivacyRoute
   '/_store/register': typeof StoreRegisterRoute
@@ -284,6 +293,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/collections'
+    | '/feedback'
     | '/login'
     | '/privacy'
     | '/register'
@@ -312,6 +322,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/collections'
+    | '/feedback'
     | '/login'
     | '/privacy'
     | '/register'
@@ -343,6 +354,7 @@ export interface FileRouteTypes {
     | '/_store/cart'
     | '/_store/checkout'
     | '/_store/collections'
+    | '/_store/feedback'
     | '/_store/login'
     | '/_store/privacy'
     | '/_store/register'
@@ -423,6 +435,13 @@ declare module '@tanstack/react-router' {
       path: '/collections'
       fullPath: '/collections'
       preLoaderRoute: typeof StoreCollectionsRouteImport
+      parentRoute: typeof StoreRoute
+    }
+    '/_store/feedback': {
+      id: '/_store/feedback'
+      path: '/feedback'
+      fullPath: '/feedback'
+      preLoaderRoute: typeof StoreFeedbackRouteImport
       parentRoute: typeof StoreRoute
     }
     '/_store/login': {
@@ -587,6 +606,7 @@ interface StoreRouteChildren {
   StoreCartRoute: typeof StoreCartRoute
   StoreCheckoutRoute: typeof StoreCheckoutRoute
   StoreCollectionsRoute: typeof StoreCollectionsRoute
+  StoreFeedbackRoute: typeof StoreFeedbackRoute
   StoreLoginRoute: typeof StoreLoginRoute
   StorePrivacyRoute: typeof StorePrivacyRoute
   StoreRegisterRoute: typeof StoreRegisterRoute
@@ -604,6 +624,7 @@ const StoreRouteChildren: StoreRouteChildren = {
   StoreCartRoute: StoreCartRoute,
   StoreCheckoutRoute: StoreCheckoutRoute,
   StoreCollectionsRoute: StoreCollectionsRoute,
+  StoreFeedbackRoute: StoreFeedbackRoute,
   StoreLoginRoute: StoreLoginRoute,
   StorePrivacyRoute: StorePrivacyRoute,
   StoreRegisterRoute: StoreRegisterRoute,

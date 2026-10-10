@@ -11,10 +11,10 @@ import { ErrorState, SkeletonGrid } from "@/components/common/states";
 export const Route = createFileRoute("/_store/")({
   head: () => ({
     meta: [
-      { title: "Trendora — Find Your Style. Own Every Moment." },
+      { title: "Velloria Classic — Find Your Style. Own Every Moment." },
       { name: "description", content: "Shop thoughtfully selected fashion essentials — outerwear, apparel, footwear and accessories." },
-      { property: "og:title", content: "Trendora — Find Your Style. Own Every Moment." },
-      { property: "og:description", content: "Explore the new season edit at Trendora." },
+      { property: "og:title", content: "Velloria Classic — Find Your Style. Own Every Moment." },
+      { property: "og:description", content: "Explore the new season edit at Velloria Classic." },
     ],
   }),
   component: Home,
@@ -72,9 +72,9 @@ function DiscoveryBar() {
           <label htmlFor="disc-price" className="text-xs font-semibold text-muted-foreground">Price</label>
           <select id="disc-price" className="field mt-1.5" value={price} onChange={(e) => setPrice(e.target.value)}>
             <option value="">Any price</option>
-            <option value="-10000">Under Rs 10,000</option>
-            <option value="10000-20000">Rs 10,000 – 20,000</option>
-            <option value="20000-">Over Rs 20,000</option>
+            <option value="-50">Under $50</option>
+            <option value="50-150">$50 – $150</option>
+            <option value="150-">Over $150</option>
           </select>
         </div>
         <button className="btn btn-primary h-[42px] w-full md:w-auto" type="submit">
@@ -99,11 +99,11 @@ function Newsletter() {
         <p className="eyebrow text-[#10B981]">Stay in the loop</p>
         <h2 className="mt-3 text-[26px] text-white md:text-[32px]">New drops, early access.</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-white/70">
-          Join the Trendora list for new arrivals, seasonal edits and members-only offers. No spam — unsubscribe anytime.
+          Join the Velloria Classic list for new arrivals, seasonal edits and members-only offers. No spam — unsubscribe anytime.
         </p>
         {state === "done" ? (
           <p className="mx-auto mt-6 max-w-sm rounded-lg bg-white/10 px-4 py-3 text-sm font-medium text-[#D1FAE5]">
-            You're on the list — welcome to Trendora.
+            You're on the list — welcome to Velloria Classic.
           </p>
         ) : (
           <form onSubmit={submit} className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row">
@@ -246,7 +246,7 @@ function Home() {
       {/* F. Editorial Campaign Banner */}
       <section className="mx-auto mt-20 max-w-7xl px-4 md:px-8">
         <div className="relative overflow-hidden rounded-2xl">
-          <img src={editorial} alt="Trendora editorial — everyday essentials" className="h-80 w-full object-cover md:h-96" />
+          <img src={editorial} alt="Velloria Classic editorial — everyday essentials" className="h-80 w-full object-cover md:h-96" />
           <div className="absolute inset-0 bg-gradient-to-r from-teal/85 via-teal/50 to-transparent" aria-hidden="true" />
           <div className="absolute inset-0 flex items-center px-6 md:px-14">
             <div className="max-w-lg text-white">

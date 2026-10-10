@@ -12,9 +12,9 @@ import type { Order, RequestType } from "@/types";
 export const Route = createFileRoute("/_store/account/orders/$id")({
   head: () => ({
     meta: [
-      { title: "Order details — Trendora" },
+      { title: "Order details — Velloria Classic" },
       { name: "description", content: "Order status, items, and refund or cancellation requests." },
-      { property: "og:title", content: "Order details — Trendora" },
+      { property: "og:title", content: "Order details — Velloria Classic" },
       { property: "og:description", content: "Order status and details." },
     ],
   }),

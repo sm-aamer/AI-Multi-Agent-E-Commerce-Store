@@ -1,12 +1,14 @@
 // Single entry point for all data access. UI code imports `api` only.
 // Toggle with VITE_USE_MOCK_API=false and point VITE_API_BASE_URL at FastAPI.
-import type { AIRecommendation, Category, Customer, DescriptionDraft, Order, PricingSuggestion, Product, ProductQuery, RefundRequest, RequestStatus, Session } from "@/types";
+import type { AIRecommendation, Category, Customer, DescriptionDraft, FeedbackInput, Order, PricingSuggestion, Product, ProductQuery, RefundRequest, RequestStatus, Session } from "@/types";
 import { http, qs, USE_MOCK } from "./http";
 import { mockApi } from "./mock";
 
 const j = (b: unknown) => JSON.stringify(b);
 
 const restApi: typeof mockApi = {
+  // Requires a POST /feedback endpoint on the FastAPI backend (not implemented yet).
+  submitFeedback: (f) => http<{ ok: boolean }>("/feedback", { method: "POST", body: j(f) }),
   listCategories: () => http<Category[]>("/categories"),
   saveCategory: (c) => (c.id ? http<Category>(`/categories/${c.id}`, { method: "PUT", body: j(c) }) : http<Category>("/categories", { method: "POST", body: j(c) })),
   listProducts: (q = {}) => http<Product[]>(`/products${qs(q as ProductQuery)}`),

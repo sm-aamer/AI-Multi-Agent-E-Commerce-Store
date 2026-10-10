@@ -28,9 +28,9 @@ type Form = z.infer<typeof schema>;
 export const Route = createFileRoute("/_store/checkout")({
   head: () => ({
     meta: [
-      { title: "Checkout — Trendora" },
+      { title: "Checkout — Velloria Classic" },
       { name: "description", content: "Enter delivery details and choose Bank Transfer or Cash on Delivery." },
-      { property: "og:title", content: "Checkout — Trendora" },
+      { property: "og:title", content: "Checkout — Velloria Classic" },
       { property: "og:description", content: "Secure checkout with Bank Transfer or COD." },
     ],
   }),
@@ -111,7 +111,7 @@ function Checkout() {
           {method === "bank_transfer" && (
             <div className="panel mt-4 space-y-3 bg-secondary p-4 text-sm">
               <p className="font-semibold">Bank details (configurable placeholder)</p>
-              <p className="text-muted-foreground">Account: Trendora Retail · IBAN PK00 DEMO 0000 0000 0000 · Bank: Demo Bank</p>
+              <p className="text-muted-foreground">Account: Velloria Classic Retail · IBAN PK00 DEMO 0000 0000 0000 · Bank: Demo Bank</p>
               <div>
                 <label className="font-medium" htmlFor="bankReference">Transfer reference / transaction ID</label>
                 <input id="bankReference" className="field mt-1" {...register("bankReference")} />

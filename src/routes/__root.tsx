@@ -45,9 +45,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Trendora — Find Your Style. Own Every Moment." },
-      { name: "description", content: "Trendora is a premium fashion storefront — thoughtfully selected essentials for everyday confidence." },
-      { property: "og:title", content: "Trendora — Find Your Style. Own Every Moment." },
+      { title: "Velloria Classic — Find Your Style. Own Every Moment." },
+      { name: "description", content: "Velloria Classic is a premium fashion storefront — thoughtfully selected essentials for everyday confidence." },
+      { property: "og:title", content: "Velloria Classic — Find Your Style. Own Every Moment." },
       { property: "og:description", content: "Premium fashion storefront — shop the new season edit." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -9,7 +9,7 @@ import { ErrorState, LoadingState, StatusBadge } from "@/components/common/state
 import type { OrderStatus } from "@/types";
 
 export const Route = createFileRoute("/admin/")({
-  head: () => ({ meta: [{ title: "Overview — Trendora Admin" }, { name: "description", content: "Store overview" }, { property: "og:title", content: "Overview — Trendora Admin" }, { property: "og:description", content: "Store overview" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Overview — Velloria Classic Admin" }, { name: "description", content: "Store overview" }, { property: "og:title", content: "Overview — Velloria Classic Admin" }, { property: "og:description", content: "Store overview" }, { name: "robots", content: "noindex" }] }),
   component: Overview,
 });
 
@@ -67,7 +67,7 @@ function Overview() {
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
         <div className="panel p-5">
           <h2 className="text-base font-bold">Sales by day</h2>
-          <p className="text-xs text-muted-foreground">Non-cancelled orders, PKR</p>
+          <p className="text-xs text-muted-foreground">Non-cancelled orders, USD</p>
           <div className="mt-4 h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={salesByDay} margin={{ top: 4, right: 8, left: -8, bottom: 0 }}>

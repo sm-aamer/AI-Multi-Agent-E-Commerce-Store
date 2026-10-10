@@ -8,7 +8,7 @@ import { EmptyState, ErrorState, LoadingState, StatusBadge } from "@/components/
 import type { RequestStatus } from "@/types";
 
 export const Route = createFileRoute("/admin/descriptions")({
-  head: () => ({ meta: [{ title: "Product SEO Assistant — Trendora Admin" }, { name: "description", content: "Review AI-generated descriptions and SEO metadata" }, { property: "og:title", content: "Product SEO Assistant — Trendora Admin" }, { property: "og:description", content: "Review AI-generated descriptions and SEO metadata" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Product SEO Assistant — Velloria Classic Admin" }, { name: "description", content: "Review AI-generated descriptions and SEO metadata" }, { property: "og:title", content: "Product SEO Assistant — Velloria Classic Admin" }, { property: "og:description", content: "Review AI-generated descriptions and SEO metadata" }, { name: "robots", content: "noindex" }] }),
   component: SeoAssistant,
 });
 
@@ -38,7 +38,7 @@ function SeoAssistant() {
                 {(d.seoTitle || d.seoDescription) && (
                   <div className="mt-4 rounded-lg border p-4">
                     <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">SEO metadata preview</p>
-                    <p className="mt-2 text-sm font-semibold text-info">{d.seoTitle ?? `${product?.name} — Trendora`}</p>
+                    <p className="mt-2 text-sm font-semibold text-info">{d.seoTitle ?? `${product?.name} — Velloria Classic`}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{d.seoDescription ?? "No meta description generated yet."}</p>
                     {d.seoTitle && d.seoTitle.length > 60 && <p className="mt-1 text-xs text-warning">Title is {d.seoTitle.length} characters — aim for under 60.</p>}
                   </div>

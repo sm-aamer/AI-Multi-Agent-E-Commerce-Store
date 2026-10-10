@@ -10,10 +10,10 @@ import {
 export const Route = createFileRoute("/_store/about")({
   head: () => ({
     meta: [
-      { title: "About — Trendora" },
-      { name: "description", content: "The story behind Trendora, plus delivery, payment and returns answers." },
-      { property: "og:title", content: "About — Trendora" },
-      { property: "og:description", content: "The story behind Trendora." },
+      { title: "About — Velloria Classic" },
+      { name: "description", content: "The story behind Velloria Classic, plus delivery, payment and returns answers." },
+      { property: "og:title", content: "About — Velloria Classic" },
+      { property: "og:description", content: "The story behind Velloria Classic." },
     ],
   }),
   component: About,
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_store/about")({
 const faqs = [
   {
     q: "How does delivery work?",
-    a: "Orders are dispatched in 1–2 working days and delivered across Pakistan in 3–5 working days. Delivery is free on orders over Rs 25,000; a flat Rs 500 applies below that.",
+    a: "Orders are dispatched in 1–2 working days and delivered worldwide in 3–5 working days. Delivery is free on orders over $250; a flat $10 fee applies below that.",
   },
   {
     q: "Which payment methods do you accept?",
@@ -33,8 +33,7 @@ const faqs = [
     a: "Yes — unworn items with tags attached can be returned within 14 days of delivery. Raise a request from your order page and our team will review it.",
   },
   {
-    q: "Do you have physical stores?",
-    a: "Trendora is online-first for now, with plans for a Lahore flagship next season. Join the newsletter to hear about pop-ups first.",
+    q: "Do you have physical stores?",        a: "Velloria Classic is online-first for now, with plans for a flagship store next season. Join the newsletter to hear about pop-ups first.",
   },
 ];
 
@@ -44,7 +43,7 @@ function About() {
       <p className="eyebrow">Our story</p>
       <h1 className="mt-2 text-[28px] md:text-[36px]">Fashion that earns its place.</h1>
       <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
-        Trendora is a modern fashion destination built around a simple idea: fewer, better pieces. Every item in the
+        Velloria Classic is a modern fashion destination built around a simple idea: fewer, better pieces. Every item in the
         collection is chosen for quality of material, honesty of price and how hard it works in a real wardrobe — from
         weekday layers to weekend staples.
       </p>
@@ -60,7 +59,7 @@ function About() {
         <div className="panel p-6">
           <h2 className="text-lg">Honest pricing</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Transparent pricing in PKR with no fake discounts. When something is on sale, the original price is the one
+            Transparent pricing in USD with no fake discounts. When something is on sale, the original price is the one
             we actually sold at.
           </p>
         </div>
@@ -69,10 +68,10 @@ function About() {
       <section className="mt-14">
         <h2 className="text-[24px] md:text-[28px]">Good to know</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-          <div className="panel flex items-start gap-3 p-4"><Truck className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Nationwide delivery</p><p className="mt-1 text-muted-foreground">3–5 working days, free over Rs 25,000.</p></div></div>
+          <div className="panel flex items-start gap-3 p-4"><Truck className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Worldwide delivery</p><p className="mt-1 text-muted-foreground">3–5 working days, free over $250.</p></div></div>
           <div className="panel flex items-start gap-3 p-4"><Banknote className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Cash on Delivery</p><p className="mt-1 text-muted-foreground">Pay when your order arrives.</p></div></div>
           <div className="panel flex items-start gap-3 p-4"><Landmark className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Bank Transfer</p><p className="mt-1 text-muted-foreground">Verified before shipping.</p></div></div>
-          <div className="panel flex items-start gap-3 p-4"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Real support</p><p className="mt-1 text-muted-foreground">Mon–Sat, support@trendora.pk</p></div></div>
+          <div className="panel flex items-start gap-3 p-4"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Real support</p><p className="mt-1 text-muted-foreground">Mon–Sat, support@velloriaclassic.com</p></div></div>
         </div>
       </section>
 

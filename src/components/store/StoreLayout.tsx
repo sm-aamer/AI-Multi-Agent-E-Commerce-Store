@@ -68,7 +68,7 @@ export function StoreLayout() {
             <Menu className="h-5 w-5" />
           </button>
           <Link to="/" className="font-display text-xl font-extrabold tracking-tight text-white md:text-2xl">
-            Trendora
+            Velloria Classic
           </Link>
           <nav className="hidden items-center gap-1 text-sm font-medium lg:flex">
             <Link
@@ -148,7 +148,7 @@ export function StoreLayout() {
           <div className="fixed inset-0 z-50 flex lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
             <aside className="flex w-72 flex-col bg-teal text-white">
               <div className="flex h-14 items-center justify-between border-b border-white/10 px-4">
-                <span className="font-display text-xl font-extrabold">Trendora</span>
+                <span className="font-display text-xl font-extrabold">Velloria Classic</span>
                 <button onClick={() => setDrawer(false)} aria-label="Close menu">
                   <X className="h-5 w-5" />
                 </button>
@@ -195,7 +195,7 @@ export function StoreLayout() {
       <footer className="mt-24 bg-teal text-white/80">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 text-sm md:grid-cols-4 md:px-8">
           <div>
-            <p className="font-display text-2xl font-extrabold text-white">Trendora</p>
+            <p className="font-display text-2xl font-extrabold text-white">Velloria Classic</p>
             <p className="mt-3 leading-relaxed text-white/70">
               Thoughtfully selected fashion essentials for everyday confidence. Premium quality, honest pricing,
               delivered across Pakistan.
@@ -217,19 +217,20 @@ export function StoreLayout() {
             <Link to="/account" className="block text-white/70 hover:text-white">Order history</Link>
             <Link to="/wishlist" className="block text-white/70 hover:text-white">Wishlist</Link>
             <Link to="/about" className="block text-white/70 hover:text-white">About &amp; FAQ</Link>
-            <a href="mailto:support@trendora.pk" className="block text-white/70 hover:text-white">support@trendora.pk</a>
+            <Link to="/feedback" className="block text-white/70 hover:text-white">Send feedback</Link>
+            <a href="mailto:support@velloriaclassic.com" className="block text-white/70 hover:text-white">support@velloriaclassic.com</a>
           </div>
           <div className="space-y-2.5">
             <p className="text-xs font-semibold uppercase tracking-wider text-white">Payment &amp; delivery</p>
             <p className="text-white/70">Cash on Delivery</p>
             <p className="text-white/70">Bank Transfer</p>
-            <p className="text-white/70">Free delivery over Rs 25,000</p>
+            <p className="text-white/70">Free delivery over $250</p>
             <p className="text-white/70">Order updates by email &amp; SMS</p>
           </div>
         </div>
         <div className="border-t border-white/10">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-white/60 md:flex-row md:px-8">
-            <p>© 2026 Trendora. All rights reserved.</p>
+            <p>© 2026 Velloria Classic. All rights reserved.</p>
             <div className="flex gap-5">
               <Link to="/privacy" className="hover:text-white">Privacy</Link>
               <Link to="/terms" className="hover:text-white">Terms</Link>

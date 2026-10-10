@@ -16,7 +16,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import type { Product } from "@/types";
 
 export const Route = createFileRoute("/admin/products")({
-  head: () => ({ meta: [{ title: "Products — Trendora Admin" }, { name: "description", content: "Manage products" }, { property: "og:title", content: "Products — Trendora Admin" }, { property: "og:description", content: "Manage products" }] }),
+  head: () => ({ meta: [{ title: "Products — Velloria Classic Admin" }, { name: "description", content: "Manage products" }, { property: "og:title", content: "Products — Velloria Classic Admin" }, { property: "og:description", content: "Manage products" }] }),
   component: Products,
 });
 

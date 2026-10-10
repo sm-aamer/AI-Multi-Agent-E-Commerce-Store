@@ -6,10 +6,10 @@ import { useAuth } from "@/store/auth";
 export const Route = createFileRoute("/_store/login")({
   head: () => ({
     meta: [
-      { title: "Sign in — Trendora" },
+      { title: "Sign in — Velloria Classic" },
       { name: "description", content: "Sign in to view your orders." },
-      { property: "og:title", content: "Sign in — Trendora" },
-      { property: "og:description", content: "Sign in to your Trendora account." },
+      { property: "og:title", content: "Sign in — Velloria Classic" },
+      { property: "og:description", content: "Sign in to your Velloria Classic account." },
     ],
   }),
   component: Login,

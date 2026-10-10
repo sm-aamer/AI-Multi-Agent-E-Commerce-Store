@@ -33,7 +33,7 @@ export const products: Product[] = raw.map(([name, price, categoryId, stock, rat
   slug: name.toLowerCase().replace(/\s+/g, "-"),
   description: `The ${name.toLowerCase()} is cut from carefully sourced materials and finished by hand. A considered wardrobe staple designed to be worn season after season.`,
   price, compareAtPrice, categoryId, stock, rating, featured,
-  image: img[categoryId],
+  image: img[categoryId]!,
   sizes: categoryId === "c4" ? undefined : categoryId === "c3" ? ["40", "41", "42", "43", "44"] : ["XS", "S", "M", "L", "XL"],
 }));
 
@@ -71,6 +71,6 @@ export const pricingSuggestions: PricingSuggestion[] = [
 ];
 
 export const descriptionDrafts: DescriptionDraft[] = [
-  { id: "d1", productId: "p2", current: products[1].description, generated: "A modern take on a heritage silhouette. Water-resistant cotton gabardine, storm flap and a belted waist make this trench as practical as it is polished.", status: "pending" },
-  { id: "d2", productId: "p8", current: products[7].description, generated: "Clean Italian leather on a cushioned rubber cupsole. The everyday sneaker, refined — pairs with tailoring and denim alike.", status: "pending" },
+  { id: "d1", productId: "p2", current: products[1]!.description, generated: "A modern take on a heritage silhouette. Water-resistant cotton gabardine, storm flap and a belted waist make this trench as practical as it is polished.", status: "pending" },
+  { id: "d2", productId: "p8", current: products[7]!.description, generated: "Clean Italian leather on a cushioned rubber cupsole. The everyday sneaker, refined — pairs with tailoring and denim alike.", status: "pending" },
 ];

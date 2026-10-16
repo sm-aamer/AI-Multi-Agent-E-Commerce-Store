@@ -24,7 +24,15 @@ export function SkeletonGrid({ count = 8 }: { count?: number }) {
   );
 }
 
-export function EmptyState({ title, body, action }: { title: string; body?: string; action?: ReactNode }) {
+export function EmptyState({
+  title,
+  body,
+  action,
+}: {
+  title: string;
+  body?: string;
+  action?: ReactNode;
+}) {
   return (
     <div className="flex flex-col items-center justify-center rounded-lg border border-dashed px-6 py-16 text-center">
       <Inbox className="h-8 w-8 text-muted-foreground" />
@@ -40,8 +48,14 @@ export function ErrorState({ error, onRetry }: { error: unknown; onRetry?: () =>
     <div className="flex flex-col items-center rounded-lg border border-destructive/30 bg-destructive/5 px-6 py-12 text-center">
       <AlertTriangle className="h-8 w-8 text-destructive" />
       <h3 className="mt-3 text-lg">Something went wrong</h3>
-      <p className="mt-1 text-sm text-muted-foreground">{error instanceof Error ? error.message : "Unexpected error"}</p>
-      {onRetry && <button className="btn btn-outline mt-4" onClick={onRetry}>Try again</button>}
+      <p className="mt-1 text-sm text-muted-foreground">
+        {error instanceof Error ? error.message : "Unexpected error"}
+      </p>
+      {onRetry && (
+        <button className="btn btn-outline mt-4" onClick={onRetry}>
+          Try again
+        </button>
+      )}
     </div>
   );
 }
@@ -54,17 +68,30 @@ export function MockBanner() {
   if (!USE_MOCK) return null;
   return (
     <div className="bg-warning/20 px-4 py-1.5 text-center text-xs text-foreground">
-Prototype mode — Velloria Classic demo data only. Payments, sign-in and saved orders are not real until the backend is connected.
+      Prototype mode — Velloria Classic demo data only. Payments, sign-in and saved orders are not
+      real until the backend is connected.
     </div>
   );
 }
 
 const tones: Record<string, string> = {
-  pending: "bg-warning/20 text-foreground", awaiting_verification: "bg-warning/20 text-foreground", unpaid: "bg-muted text-muted-foreground",
-  confirmed: "bg-info/15 text-info", shipped: "bg-info/15 text-info",
-  delivered: "bg-success/15 text-success", verified: "bg-success/15 text-success", approved: "bg-success/15 text-success",
-  cancelled: "bg-destructive/10 text-destructive", rejected: "bg-destructive/10 text-destructive",
+  pending: "bg-warning/20 text-foreground",
+  awaiting_verification: "bg-warning/20 text-foreground",
+  unpaid: "bg-muted text-muted-foreground",
+  confirmed: "bg-info/15 text-info",
+  shipped: "bg-info/15 text-info",
+  delivered: "bg-success/15 text-success",
+  verified: "bg-success/15 text-success",
+  approved: "bg-success/15 text-success",
+  cancelled: "bg-destructive/10 text-destructive",
+  rejected: "bg-destructive/10 text-destructive",
 };
 export function StatusBadge({ status }: { status: string }) {
-  return <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize ${tones[status] ?? "bg-muted"}`}>{status.replace(/_/g, " ")}</span>;
+  return (
+    <span
+      className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize ${tones[status] ?? "bg-muted"}`}
+    >
+      {status.replace(/_/g, " ")}
+    </span>
+  );
 }

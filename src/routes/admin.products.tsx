@@ -16,7 +16,14 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import type { Product } from "@/types";
 
 export const Route = createFileRoute("/admin/products")({
-  head: () => ({ meta: [{ title: "Products — Velloria Classic Admin" }, { name: "description", content: "Manage products" }, { property: "og:title", content: "Products — Velloria Classic Admin" }, { property: "og:description", content: "Manage products" }] }),
+  head: () => ({
+    meta: [
+      { title: "Products — Velloria Classic Admin" },
+      { name: "description", content: "Manage products" },
+      { property: "og:title", content: "Products — Velloria Classic Admin" },
+      { property: "og:description", content: "Manage products" },
+    ],
+  }),
   component: Products,
 });
 
@@ -37,63 +44,181 @@ function Products() {
   const [editing, setEditing] = useState<Product | "new" | null>(null);
   const del = useMutation({
     mutationFn: api.deleteProduct,
-    onSuccess: () => { toast.success("Product deleted"); qc.invalidateQueries({ queryKey: ["products"] }); },
+    onSuccess: () => {
+      toast.success("Product deleted");
+      qc.invalidateQueries({ queryKey: ["products"] });
+    },
   });
 
   return (
     <>
-      <PageHeader title="Products" description="Add, edit and remove catalogue items." action={<button className="btn btn-primary" onClick={() => setEditing("new")}><Plus className="h-4 w-4" />Add product</button>} />
-      <DataTable rows={products.data} isLoading={products.isLoading} error={products.error} onRetry={() => products.refetch()} emptyTitle="No products yet"
+      <PageHeader
+        title="Products"
+        description="Add, edit and remove catalogue items."
+        action={
+          <button className="btn btn-primary" onClick={() => setEditing("new")}>
+            <Plus className="h-4 w-4" />
+            Add product
+          </button>
+        }
+      />
+      <DataTable
+        rows={products.data}
+        isLoading={products.isLoading}
+        error={products.error}
+        onRetry={() => products.refetch()}
+        emptyTitle="No products yet"
         columns={[
-          { header: "Product", cell: (p) => <div className="flex items-center gap-3"><img src={p.image} alt="" className="h-12 w-10 rounded object-cover" /><span className="font-medium">{p.name}</span></div> },
+          {
+            header: "Product",
+            cell: (p) => (
+              <div className="flex items-center gap-3">
+                <img src={p.image} alt="" className="h-12 w-10 rounded object-cover" />
+                <span className="font-medium">{p.name}</span>
+              </div>
+            ),
+          },
           { header: "Category", cell: (p) => cats.data?.find((c) => c.id === p.categoryId)?.name },
           { header: "Price", cell: (p) => money(p.price) },
-          { header: "Stock", cell: (p) => <span className={p.stock === 0 ? "text-destructive" : p.stock < 5 ? "text-warning" : ""}>{p.stock}</span> },
-          { header: "", className: "text-right", cell: (p) => (
-            <div className="flex justify-end gap-1">
-              <button className="btn btn-ghost px-2" aria-label="Edit" onClick={() => setEditing(p)}><Pencil className="h-4 w-4" /></button>
-              <button className="btn btn-ghost px-2 text-destructive" aria-label="Delete" onClick={() => confirm(`Delete ${p.name}?`) && del.mutate(p.id)}><Trash2 className="h-4 w-4" /></button>
-            </div>
-          ) },
-        ]} />
+          {
+            header: "Stock",
+            cell: (p) => (
+              <span
+                className={p.stock === 0 ? "text-destructive" : p.stock < 5 ? "text-warning" : ""}
+              >
+                {p.stock}
+              </span>
+            ),
+          },
+          {
+            header: "",
+            className: "text-right",
+            cell: (p) => (
+              <div className="flex justify-end gap-1">
+                <button
+                  className="btn btn-ghost px-2"
+                  aria-label="Edit"
+                  onClick={() => setEditing(p)}
+                >
+                  <Pencil className="h-4 w-4" />
+                </button>
+                <button
+                  className="btn btn-ghost px-2 text-destructive"
+                  aria-label="Delete"
+                  onClick={() => confirm(`Delete ${p.name}?`) && del.mutate(p.id)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            ),
+          },
+        ]}
+      />
       <Dialog open={!!editing} onOpenChange={(o) => !o && setEditing(null)}>
         <DialogContent className="max-h-[90vh] overflow-y-auto">
-          <DialogHeader><DialogTitle>{editing === "new" ? "Add product" : "Edit product"}</DialogTitle></DialogHeader>
-          {editing && <ProductForm product={editing === "new" ? undefined : editing} categories={cats.data ?? []} onDone={() => setEditing(null)} />}
+          <DialogHeader>
+            <DialogTitle>{editing === "new" ? "Add product" : "Edit product"}</DialogTitle>
+          </DialogHeader>
+          {editing && (
+            <ProductForm
+              product={editing === "new" ? undefined : editing}
+              categories={cats.data ?? []}
+              onDone={() => setEditing(null)}
+            />
+          )}
         </DialogContent>
       </Dialog>
     </>
   );
 }
 
-function ProductForm({ product, categories, onDone }: { product?: Product; categories: { id: string; name: string }[]; onDone: () => void }) {
+function ProductForm({
+  product,
+  categories,
+  onDone,
+}: {
+  product?: Product;
+  categories: { id: string; name: string }[];
+  onDone: () => void;
+}) {
   const qc = useQueryClient();
-  const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm<Form>({
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm<Form>({
     resolver: zodResolver(schema) as never,
-    defaultValues: product ?? { name: "", description: "", price: 0, categoryId: "", stock: 0, image: "" },
+    defaultValues: product ?? {
+      name: "",
+      description: "",
+      price: 0,
+      categoryId: "",
+      stock: 0,
+      image: "",
+    },
   });
   const img = watch("image");
   const submit = async (f: Form) => {
-    await api.saveProduct({ ...(product ?? { id: "", slug: "", rating: 0 }), ...f, slug: f.name.toLowerCase().replace(/\s+/g, "-") } as Product);
+    await api.saveProduct({
+      ...(product ?? { id: "", slug: "", rating: 0 }),
+      ...f,
+      slug: f.name.toLowerCase().replace(/\s+/g, "-"),
+    } as Product);
     toast.success(product ? "Product updated" : "Product added");
     qc.invalidateQueries({ queryKey: ["products"] });
     onDone();
   };
   const field = (name: keyof Form, label: string, type = "text") => (
-    <div><label className="text-sm font-medium" htmlFor={name}>{label}</label><input id={name} type={type} step="any" className="field mt-1" {...register(name)} /><FieldError message={errors[name]?.message} /></div>
+    <div>
+      <label className="text-sm font-medium" htmlFor={name}>
+        {label}
+      </label>
+      <input id={name} type={type} step="any" className="field mt-1" {...register(name)} />
+      <FieldError message={errors[name]?.message} />
+    </div>
   );
   return (
     <form className="space-y-4" onSubmit={handleSubmit(submit)}>
       {field("name", "Name")}
-      <div><label className="text-sm font-medium" htmlFor="description">Description</label><textarea id="description" className="field mt-1 min-h-24" {...register("description")} /><FieldError message={errors.description?.message} /></div>
-      <div className="grid grid-cols-2 gap-4">{field("price", "Price (USD)", "number")}{field("stock", "Stock", "number")}</div>
-      <div><label className="text-sm font-medium" htmlFor="categoryId">Category</label>
-        <select id="categoryId" className="field mt-1" {...register("categoryId")}><option value="">Select…</option>{categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select>
-        <FieldError message={errors.categoryId?.message} /></div>
+      <div>
+        <label className="text-sm font-medium" htmlFor="description">
+          Description
+        </label>
+        <textarea id="description" className="field mt-1 min-h-24" {...register("description")} />
+        <FieldError message={errors.description?.message} />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        {field("price", "Price (USD)", "number")}
+        {field("stock", "Stock", "number")}
+      </div>
+      <div>
+        <label className="text-sm font-medium" htmlFor="categoryId">
+          Category
+        </label>
+        <select id="categoryId" className="field mt-1" {...register("categoryId")}>
+          <option value="">Select…</option>
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+        <FieldError message={errors.categoryId?.message} />
+      </div>
       {field("image", "Image URL")}
       {img && <img src={img} alt="Preview" className="h-24 w-20 rounded object-cover" />}
-      <p className="text-xs text-muted-foreground">File upload will be handled by the FastAPI backend; paste a URL for now.</p>
-      <div className="flex justify-end gap-2"><button type="button" className="btn btn-ghost" onClick={onDone}>Cancel</button><button className="btn btn-primary" disabled={isSubmitting}>{isSubmitting ? "Saving…" : "Save"}</button></div>
+      <p className="text-xs text-muted-foreground">
+        File upload will be handled by the FastAPI backend; paste a URL for now.
+      </p>
+      <div className="flex justify-end gap-2">
+        <button type="button" className="btn btn-ghost" onClick={onDone}>
+          Cancel
+        </button>
+        <button className="btn btn-primary" disabled={isSubmitting}>
+          {isSubmitting ? "Saving…" : "Save"}
+        </button>
+      </div>
     </form>
   );
 }

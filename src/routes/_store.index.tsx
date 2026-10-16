@@ -12,7 +12,11 @@ export const Route = createFileRoute("/_store/")({
   head: () => ({
     meta: [
       { title: "Velloria Classic — Find Your Style. Own Every Moment." },
-      { name: "description", content: "Shop thoughtfully selected fashion essentials — outerwear, apparel, footwear and accessories." },
+      {
+        name: "description",
+        content:
+          "Shop thoughtfully selected fashion essentials — outerwear, apparel, footwear and accessories.",
+      },
       { property: "og:title", content: "Velloria Classic — Find Your Style. Own Every Moment." },
       { property: "og:description", content: "Explore the new season edit at Velloria Classic." },
     ],
@@ -49,7 +53,9 @@ function DiscoveryBar() {
         aria-label="Find products"
       >
         <div>
-          <label htmlFor="disc-q" className="text-xs font-semibold text-muted-foreground">Search</label>
+          <label htmlFor="disc-q" className="text-xs font-semibold text-muted-foreground">
+            Search
+          </label>
           <div className="relative mt-1.5">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
@@ -62,15 +68,33 @@ function DiscoveryBar() {
           </div>
         </div>
         <div>
-          <label htmlFor="disc-cat" className="text-xs font-semibold text-muted-foreground">Category</label>
-          <select id="disc-cat" className="field mt-1.5" value={category} onChange={(e) => setCategory(e.target.value)}>
+          <label htmlFor="disc-cat" className="text-xs font-semibold text-muted-foreground">
+            Category
+          </label>
+          <select
+            id="disc-cat"
+            className="field mt-1.5"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
             <option value="">All categories</option>
-            {cats.data?.map((c) => <option key={c.id} value={c.slug}>{c.name}</option>)}
+            {cats.data?.map((c) => (
+              <option key={c.id} value={c.slug}>
+                {c.name}
+              </option>
+            ))}
           </select>
         </div>
         <div>
-          <label htmlFor="disc-price" className="text-xs font-semibold text-muted-foreground">Price</label>
-          <select id="disc-price" className="field mt-1.5" value={price} onChange={(e) => setPrice(e.target.value)}>
+          <label htmlFor="disc-price" className="text-xs font-semibold text-muted-foreground">
+            Price
+          </label>
+          <select
+            id="disc-price"
+            className="field mt-1.5"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          >
             <option value="">Any price</option>
             <option value="-50">Under $50</option>
             <option value="50-150">$50 – $150</option>
@@ -99,7 +123,8 @@ function Newsletter() {
         <p className="eyebrow text-[#10B981]">Stay in the loop</p>
         <h2 className="mt-3 text-[26px] text-white md:text-[32px]">New drops, early access.</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-white/70">
-          Join the Velloria Classic list for new arrivals, seasonal edits and members-only offers. No spam — unsubscribe anytime.
+          Join the Velloria Classic list for new arrivals, seasonal edits and members-only offers.
+          No spam — unsubscribe anytime.
         </p>
         {state === "done" ? (
           <p className="mx-auto mt-6 max-w-sm rounded-lg bg-white/10 px-4 py-3 text-sm font-medium text-[#D1FAE5]">
@@ -113,12 +138,19 @@ function Newsletter() {
               placeholder="you@example.com"
               className="field border-white/25 bg-white/10 text-white placeholder:text-white/60 focus:border-[#10B981]"
               value={email}
-              onChange={(e) => { setEmail(e.target.value); setState("idle"); }}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setState("idle");
+              }}
             />
-            <button className="btn btn-primary shrink-0" type="submit">Subscribe</button>
+            <button className="btn btn-primary shrink-0" type="submit">
+              Subscribe
+            </button>
           </form>
         )}
-        {state === "error" && <p className="mt-3 text-sm text-[#FCA5A5]">Please enter a valid email address.</p>}
+        {state === "error" && (
+          <p className="mt-3 text-sm text-[#FCA5A5]">Please enter a valid email address.</p>
+        )}
       </div>
     </section>
   );
@@ -130,10 +162,26 @@ function Home() {
   const featured = products.data?.filter((p) => p.featured).slice(0, 4) ?? [];
   const arrivals = products.data?.filter((p) => p.isNew).slice(0, 4) ?? [];
   const benefits = [
-    { icon: Truck, title: "Cash on Delivery", body: "Pay in cash when your order arrives, anywhere in Pakistan." },
-    { icon: ShieldCheck, title: "Bank Transfer", body: "Prefer transfer? Verified by our team before shipping." },
-    { icon: Headphones, title: "Customer Support", body: "Real humans, Mon–Sat, ready to help with your order." },
-    { icon: BadgeCheck, title: "Clear Order Updates", body: "Track every step from confirmation to delivery." },
+    {
+      icon: Truck,
+      title: "Cash on Delivery",
+      body: "Pay in cash when your order arrives, anywhere in Pakistan.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Bank Transfer",
+      body: "Prefer transfer? Verified by our team before shipping.",
+    },
+    {
+      icon: Headphones,
+      title: "Customer Support",
+      body: "Real humans, Mon–Sat, ready to help with your order.",
+    },
+    {
+      icon: BadgeCheck,
+      title: "Clear Order Updates",
+      body: "Track every step from confirmation to delivery.",
+    },
   ];
 
   return (
@@ -145,12 +193,16 @@ function Home() {
           alt="Model wearing a camel wool overcoat from the new season collection"
           className="absolute inset-0 h-full w-full object-cover object-[70%_center] opacity-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-teal via-teal/70 to-transparent md:via-teal/40" aria-hidden="true" />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-teal via-teal/70 to-transparent md:via-teal/40"
+          aria-hidden="true"
+        />
         <div className="relative mx-auto flex min-h-[520px] max-w-7xl items-center px-4 py-20 md:min-h-[640px] md:px-8">
           <div className="max-w-xl text-white">
             <p className="eyebrow text-[#10B981]">The New Season Edit</p>
             <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white md:text-6xl">
-              Find Your Style.<br className="hidden sm:block" /> Own Every Moment.
+              Find Your Style.
+              <br className="hidden sm:block" /> Own Every Moment.
             </h1>
             <p className="mt-5 max-w-md text-base text-white/80">
               Explore thoughtfully selected fashion essentials designed for everyday confidence.
@@ -179,7 +231,9 @@ function Home() {
             <p className="eyebrow">Curated for you</p>
             <h2 className="mt-2 text-[26px] md:text-[32px]">Shop by Category</h2>
           </div>
-          <Link to="/shop" className="text-sm font-medium text-accent underline underline-offset-4">View all</Link>
+          <Link to="/shop" className="text-sm font-medium text-accent underline underline-offset-4">
+            View all
+          </Link>
         </div>
         {cats.isError ? (
           <ErrorState error={cats.error} onRetry={() => cats.refetch()} />
@@ -187,8 +241,18 @@ function Home() {
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {(cats.data ?? Array.from({ length: 4 })).map((c, i) =>
               c ? (
-                <Link key={c.id} to="/shop" search={{ category: c.slug }} className="group relative aspect-[3/4] overflow-hidden rounded-xl bg-muted">
-                  <img src={c.image} alt={c.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Link
+                  key={c.id}
+                  to="/shop"
+                  search={{ category: c.slug }}
+                  className="group relative aspect-[3/4] overflow-hidden rounded-xl bg-muted"
+                >
+                  <img
+                    src={c.image}
+                    alt={c.name}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-teal/90 via-teal/40 to-transparent p-4 pt-10">
                     <p className="font-display text-lg font-bold text-white">{c.name}</p>
                     {c.blurb && <p className="mt-0.5 text-xs text-white/75">{c.blurb}</p>}
@@ -209,7 +273,9 @@ function Home() {
             <p className="eyebrow">Most wanted</p>
             <h2 className="mt-2 text-[26px] md:text-[32px]">Trending Now</h2>
           </div>
-          <Link to="/shop" className="text-sm font-medium text-accent underline underline-offset-4">Shop all</Link>
+          <Link to="/shop" className="text-sm font-medium text-accent underline underline-offset-4">
+            Shop all
+          </Link>
         </div>
         {products.isLoading ? (
           <SkeletonGrid count={4} />
@@ -217,7 +283,9 @@ function Home() {
           <ErrorState error={products.error} onRetry={() => products.refetch()} />
         ) : (
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-            {featured.map((p) => <ProductCard key={p.id} product={p} />)}
+            {featured.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
           </div>
         )}
       </section>
@@ -228,9 +296,17 @@ function Home() {
           <div>
             <p className="eyebrow">Just landed</p>
             <h2 className="mt-2 text-[26px] md:text-[32px]">New Arrivals</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Fresh pieces added this week — limited stock.</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Fresh pieces added this week — limited stock.
+            </p>
           </div>
-          <Link to="/shop" search={{ sort: "newest" }} className="text-sm font-medium text-accent underline underline-offset-4">View All</Link>
+          <Link
+            to="/shop"
+            search={{ sort: "newest" }}
+            className="text-sm font-medium text-accent underline underline-offset-4"
+          >
+            View All
+          </Link>
         </div>
         {products.isLoading ? (
           <SkeletonGrid count={4} />
@@ -238,7 +314,9 @@ function Home() {
           <ErrorState error={products.error} onRetry={() => products.refetch()} />
         ) : (
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-            {arrivals.map((p) => <ProductCard key={p.id} product={p} />)}
+            {arrivals.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
           </div>
         )}
       </section>
@@ -246,16 +324,28 @@ function Home() {
       {/* F. Editorial Campaign Banner */}
       <section className="mx-auto mt-20 max-w-7xl px-4 md:px-8">
         <div className="relative overflow-hidden rounded-2xl">
-          <img src={editorial} alt="Velloria Classic editorial — everyday essentials" className="h-80 w-full object-cover md:h-96" />
-          <div className="absolute inset-0 bg-gradient-to-r from-teal/85 via-teal/50 to-transparent" aria-hidden="true" />
+          <img
+            src={editorial}
+            alt="Velloria Classic editorial — everyday essentials"
+            className="h-80 w-full object-cover md:h-96"
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-teal/85 via-teal/50 to-transparent"
+            aria-hidden="true"
+          />
           <div className="absolute inset-0 flex items-center px-6 md:px-14">
             <div className="max-w-lg text-white">
               <p className="eyebrow text-[#10B981]">The Edit</p>
-              <h2 className="mt-3 text-3xl font-extrabold text-white md:text-[38px]">Everyday Essentials. Elevated.</h2>
+              <h2 className="mt-3 text-3xl font-extrabold text-white md:text-[38px]">
+                Everyday Essentials. Elevated.
+              </h2>
               <p className="mt-3 max-w-sm text-sm text-white/80">
-                Considered pieces that work harder in your wardrobe — from weekday layers to weekend staples.
+                Considered pieces that work harder in your wardrobe — from weekday layers to weekend
+                staples.
               </p>
-              <Link to="/collections" className="btn btn-primary mt-6 px-6 py-3">Explore the Edit</Link>
+              <Link to="/collections" className="btn btn-primary mt-6 px-6 py-3">
+                Explore the Edit
+              </Link>
             </div>
           </div>
         </div>

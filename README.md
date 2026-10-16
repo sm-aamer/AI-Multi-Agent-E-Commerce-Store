@@ -3,6 +3,7 @@
 Build a modern, responsive full-stack e-commerce frontend for my capstone project named **AI-Powered E-Commerce Platform**.
 
 **Important architecture requirements:**
+
 - Use React, TypeScript, and Tailwind CSS.
 - The primary backend will be a separately developed FastAPI REST API with PostgreSQL and SQLAlchemy.
 - Do not create a Supabase dependency or another mandatory backend.
@@ -11,6 +12,7 @@ Build a modern, responsive full-stack e-commerce frontend for my capstone projec
 - Make the project GitHub-friendly and maintainable.
 
 **Customer Store pages:**
+
 1. Home page with navigation, hero section, featured products, categories, and search.
 2. Product listing page with search, category filters, price filters, and sorting.
 3. Product details page.
@@ -20,6 +22,7 @@ Build a modern, responsive full-stack e-commerce frontend for my capstone projec
 7. Refund and cancellation request interface.
 
 **Admin Dashboard pages:**
+
 1. Admin login and protected dashboard layout.
 2. Overview with order, product, customer, and sales summaries.
 3. Product management with add, edit, delete, category, stock, and image fields.
@@ -31,6 +34,7 @@ Build a modern, responsive full-stack e-commerce frontend for my capstone projec
 9. AI recommendations, competitor pricing suggestions, and AI-generated product description review pages.
 
 **Design requirements:**
+
 - Professional, modern fashion e-commerce design.
 - Responsive on desktop, tablet, and mobile.
 - Separate customer and admin layouts.
@@ -41,6 +45,24 @@ Build a modern, responsive full-stack e-commerce frontend for my capstone projec
 First generate the complete UI and navigation. Keep the code organized for later integration with FastAPI, PostgreSQL, and five LangGraph AI agents. Do not implement the AI agents yet.
 
 This project was built with [Lovable](https://lovable.dev).
+
+## FastAPI + LangGraph backend readiness
+
+This frontend has been structured to match the BRD-driven architecture:
+
+- Frontend logic is isolated from backend concerns through the service layer in `src/services/`.
+- Mock data remains separate from production API calls and can be disabled with `VITE_USE_MOCK_API=false`.
+- The API client is aligned with the FastAPI contract expected by the capstone BRD for auth, catalog, orders, refunds, and AI review flows.
+- A backend contract reference is available in `src/services/backend-contract.ts` so the next FastAPI implementation follows the same route conventions used by the UI.
+
+### Environment
+
+```env
+VITE_USE_MOCK_API=true
+VITE_API_BASE_URL=http://localhost:8000/api/v1
+```
+
+Set `VITE_USE_MOCK_API=false` and point `VITE_API_BASE_URL` to the deployed FastAPI service when the Python backend is ready.
 
 ## Build with Lovable
 

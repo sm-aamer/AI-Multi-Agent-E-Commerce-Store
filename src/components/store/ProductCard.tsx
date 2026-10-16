@@ -20,7 +20,11 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group">
       <div className="relative">
-        <Link to="/product/$id" params={{ id: product.id }} className="block aspect-[4/5] overflow-hidden rounded-xl bg-muted">
+        <Link
+          to="/product/$id"
+          params={{ id: product.id }}
+          className="block aspect-[4/5] overflow-hidden rounded-xl bg-muted"
+        >
           <img
             src={product.image}
             alt={product.name}
@@ -34,29 +38,45 @@ export function ProductCard({ product }: { product: Product }) {
             {product.compareAtPrice && product.stock > 0 && (
               <span className="chip bg-accent text-white">Sale</span>
             )}
-            {product.stock === 0 && <span className="chip bg-white/95 text-foreground">Sold out</span>}
+            {product.stock === 0 && (
+              <span className="chip bg-white/95 text-foreground">Sold out</span>
+            )}
           </div>
         </Link>
         <button
           className="absolute right-3 top-3"
-          aria-label={saved ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
+          aria-label={
+            saved ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`
+          }
           onClick={() => {
             const nowSaved = wishlist.toggle(product.id);
-            toast(nowSaved ? `${product.name} saved to wishlist` : `${product.name} removed from wishlist`);
+            toast(
+              nowSaved
+                ? `${product.name} saved to wishlist`
+                : `${product.name} removed from wishlist`,
+            );
           }}
         >
-          <span className={`flex h-8 w-8 items-center justify-center rounded-full shadow-sm transition-colors ${saved ? "bg-accent text-white" : "bg-white/95 text-foreground hover:text-accent"}`}>
+          <span
+            className={`flex h-8 w-8 items-center justify-center rounded-full shadow-sm transition-colors ${saved ? "bg-accent text-white" : "bg-white/95 text-foreground hover:text-accent"}`}
+          >
             <Heart className={`h-4 w-4 ${saved ? "fill-white" : ""}`} />
           </span>
         </button>
       </div>
       <div className="mt-3 flex items-start justify-between gap-2 text-sm">
-        <Link to="/product/$id" params={{ id: product.id }} className="font-semibold leading-snug hover:text-accent">
+        <Link
+          to="/product/$id"
+          params={{ id: product.id }}
+          className="font-semibold leading-snug hover:text-accent"
+        >
           {product.name}
         </Link>
         <p className="shrink-0 font-semibold">
           {product.compareAtPrice && (
-            <span className="mr-1.5 font-normal text-muted-foreground line-through">{money(product.compareAtPrice)}</span>
+            <span className="mr-1.5 font-normal text-muted-foreground line-through">
+              {money(product.compareAtPrice)}
+            </span>
           )}
           {money(product.price)}
         </p>

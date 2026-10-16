@@ -12,5 +12,13 @@ export function useCartLines() {
   });
   const subtotal = lines.reduce((s, l) => s + l.lineTotal, 0);
   const shipping = shippingFor(subtotal);
-  return { cart, lines, subtotal, shipping, total: subtotal + shipping, isLoading: products.isLoading, error: products.error };
+  return {
+    cart,
+    lines,
+    subtotal,
+    shipping,
+    total: subtotal + shipping,
+    isLoading: products.isLoading,
+    error: products.error,
+  };
 }

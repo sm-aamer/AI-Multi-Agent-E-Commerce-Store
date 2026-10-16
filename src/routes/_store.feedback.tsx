@@ -12,8 +12,16 @@ import { FieldError } from "@/components/common/states";
 const schema = z.object({
   name: z.string().trim().min(2, "Enter your name").max(100),
   email: z.string().trim().email("Enter a valid email"),
-  rating: z.coerce.number().int().min(1, "Choose a 1–5 star rating").max(5, "Choose a 1–5 star rating"),
-  message: z.string().trim().min(10, "Tell us a little more (min 10 characters)").max(1000, "Keep feedback under 1,000 characters"),
+  rating: z.coerce
+    .number()
+    .int()
+    .min(1, "Choose a 1–5 star rating")
+    .max(5, "Choose a 1–5 star rating"),
+  message: z
+    .string()
+    .trim()
+    .min(10, "Tell us a little more (min 10 characters)")
+    .max(1000, "Keep feedback under 1,000 characters"),
   orderId: z.string().trim().max(30, "Order numbers are short").optional(),
 });
 type Form = z.infer<typeof schema>;
@@ -24,7 +32,10 @@ export const Route = createFileRoute("/_store/feedback")({
       { title: "Feedback — Velloria Classic" },
       { name: "description", content: "Share feedback about your Velloria Classic experience." },
       { property: "og:title", content: "Feedback — Velloria Classic" },
-      { property: "og:description", content: "Share feedback about your Velloria Classic experience." },
+      {
+        property: "og:description",
+        content: "Share feedback about your Velloria Classic experience.",
+      },
     ],
   }),
   component: Feedback,
@@ -33,7 +44,14 @@ export const Route = createFileRoute("/_store/feedback")({
 function Feedback() {
   const { session } = useAuth();
   const [sent, setSent] = useState(false);
-  const { register, handleSubmit, setValue, watch, reset, formState: { errors, isSubmitting } } = useForm<Form>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<Form>({
     resolver: zodResolver(schema),
     defaultValues: { name: "", email: "", rating: 0, message: "", orderId: "" },
   });
@@ -48,7 +66,11 @@ function Feedback() {
 
   const onSubmit = async (f: Form) => {
     try {
-      await api.submitFeedback({ ...f, rating: Number(f.rating), orderId: f.orderId?.trim() || undefined });
+      await api.submitFeedback({
+        ...f,
+        rating: Number(f.rating),
+        orderId: f.orderId?.trim() || undefined,
+      });
       setSent(true);
       toast.success("Thank you for your feedback");
     } catch (e) {
@@ -63,11 +85,22 @@ function Feedback() {
           <CheckCircle2 className="mx-auto h-12 w-12 text-success" />
           <h1 className="mt-4 text-[26px]">Thank you</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Your feedback has been received — it helps us shape the collection and the experience around it.
+            Your feedback has been received — it helps us shape the collection and the experience
+            around it.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-2 sm:flex-row">
-            <button className="btn btn-primary" onClick={() => { reset({ name: "", email: "", rating: 0, message: "", orderId: "" }); setSent(false); }}>Send another</button>
-            <Link to="/shop" className="btn btn-outline">Continue shopping</Link>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                reset({ name: "", email: "", rating: 0, message: "", orderId: "" });
+                setSent(false);
+              }}
+            >
+              Send another
+            </button>
+            <Link to="/shop" className="btn btn-outline">
+              Continue shopping
+            </Link>
           </div>
         </div>
       </div>
@@ -83,28 +116,40 @@ function Feedback() {
       </p>
 
       <p className="mt-4 rounded-md border border-warning/30 bg-warning/10 p-3 text-xs text-warning">
-        Prototype notice: submissions are <span className="font-semibold">simulated in demo mode</span> and are not stored.
-        Connecting this form to production requires a <span className="font-mono">POST /feedback</span> endpoint on the
-        FastAPI backend (fields: name, email, rating, message, order_id) — the frontend service layer is already wired for it.
+        Prototype notice: submissions are{" "}
+        <span className="font-semibold">simulated in demo mode</span> and are not stored. Connecting
+        this form to production requires a <span className="font-mono">POST /feedback</span>{" "}
+        endpoint on the FastAPI backend (fields: name, email, rating, message, order_id) — the
+        frontend service layer is already wired for it.
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="panel mt-6 space-y-5 p-6">
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="fb-name" className="text-sm font-medium">Name</label>
+            <label htmlFor="fb-name" className="text-sm font-medium">
+              Name
+            </label>
             <input id="fb-name" className="field mt-1" {...register("name")} />
             <FieldError message={errors.name?.message} />
           </div>
           <div>
-            <label htmlFor="fb-email" className="text-sm font-medium">Email</label>
+            <label htmlFor="fb-email" className="text-sm font-medium">
+              Email
+            </label>
             <input id="fb-email" type="email" className="field mt-1" {...register("email")} />
             <FieldError message={errors.email?.message} />
           </div>
         </div>
 
         <div>
-          <p className="text-sm font-medium" id="fb-rating-label">Rating</p>
-          <div className="mt-1.5 flex items-center gap-1" role="radiogroup" aria-labelledby="fb-rating-label">
+          <p className="text-sm font-medium" id="fb-rating-label">
+            Rating
+          </p>
+          <div
+            className="mt-1.5 flex items-center gap-1"
+            role="radiogroup"
+            aria-labelledby="fb-rating-label"
+          >
             {[1, 2, 3, 4, 5].map((n) => (
               <button
                 key={n}
@@ -115,30 +160,52 @@ function Feedback() {
                 onClick={() => setValue("rating", n, { shouldValidate: true })}
                 className="p-1 transition-transform hover:scale-110"
               >
-                <Star className={`h-7 w-7 ${n <= Number(rating) ? "fill-warning text-warning" : "text-border"}`} />
+                <Star
+                  className={`h-7 w-7 ${n <= Number(rating) ? "fill-warning text-warning" : "text-border"}`}
+                />
               </button>
             ))}
-            <span className="ml-2 text-sm text-muted-foreground">{rating ? `${rating}/5` : "Not rated"}</span>
+            <span className="ml-2 text-sm text-muted-foreground">
+              {rating ? `${rating}/5` : "Not rated"}
+            </span>
           </div>
           <FieldError message={errors.rating?.message} />
         </div>
 
         <div>
-          <label htmlFor="fb-order" className="text-sm font-medium">Order number <span className="text-muted-foreground">(optional)</span></label>
-          <input id="fb-order" className="field mt-1" placeholder="e.g. ORD-1042" {...register("orderId")} />
+          <label htmlFor="fb-order" className="text-sm font-medium">
+            Order number <span className="text-muted-foreground">(optional)</span>
+          </label>
+          <input
+            id="fb-order"
+            className="field mt-1"
+            placeholder="e.g. ORD-1042"
+            {...register("orderId")}
+          />
           <FieldError message={errors.orderId?.message} />
         </div>
 
         <div>
-          <label htmlFor="fb-message" className="text-sm font-medium">Message</label>
-          <textarea id="fb-message" className="field mt-1 min-h-32" placeholder="What did you love? What could be better?" {...register("message")} />
+          <label htmlFor="fb-message" className="text-sm font-medium">
+            Message
+          </label>
+          <textarea
+            id="fb-message"
+            className="field mt-1 min-h-32"
+            placeholder="What did you love? What could be better?"
+            {...register("message")}
+          />
           <FieldError message={errors.message?.message} />
         </div>
 
         <button type="submit" disabled={isSubmitting} className="btn btn-primary w-full">
           {isSubmitting ? "Sending…" : "Submit feedback"}
         </button>
-        {!USE_MOCK && <p className="text-center text-xs text-muted-foreground">Sent to the Velloria Classic support team.</p>}
+        {!USE_MOCK && (
+          <p className="text-center text-xs text-muted-foreground">
+            Sent to the Velloria Classic support team.
+          </p>
+        )}
       </form>
     </div>
   );

@@ -25,13 +25,28 @@ function AdminLogin() {
       <MockBanner />
       <div className="flex flex-1 items-center justify-center px-4">
         <div className="panel w-full max-w-sm p-8">
-          <p className="font-display text-2xl">Velloria Classic <span className="text-sm text-muted-foreground">Admin</span></p>
+          <p className="font-display text-2xl">
+            Velloria Classic <span className="text-sm text-muted-foreground">Admin</span>
+          </p>
           <h1 className="mb-6 mt-4 text-2xl">Staff sign in</h1>
           <AuthForm
             mode="login"
-            hint={USE_MOCK ? "Demo: admin@demo.com with any 6+ character password. Not real authentication." : undefined}
-            onSubmit={async (v) => { const s = await api.login(v.email, v.password, true); signIn(s); navigate({ to: "/admin" }); return s; }}
-            footer={<Link to="/" className="block text-center text-sm underline">Back to store</Link>}
+            hint={
+              USE_MOCK
+                ? "Demo: admin@demo.com with any 6+ character password. Not real authentication."
+                : undefined
+            }
+            onSubmit={async (v) => {
+              const s = await api.login(v.email, v.password, true);
+              signIn(s);
+              navigate({ to: "/admin" });
+              return s;
+            }}
+            footer={
+              <Link to="/" className="block text-center text-sm underline">
+                Back to store
+              </Link>
+            }
           />
         </div>
       </div>

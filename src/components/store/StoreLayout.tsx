@@ -13,7 +13,13 @@ const nav = [
   { label: "About", to: "/about" as const },
 ];
 
-export function SearchBox({ className = "", dark = false }: { className?: string; dark?: boolean }) {
+export function SearchBox({
+  className = "",
+  dark = false,
+}: {
+  className?: string;
+  dark?: boolean;
+}) {
   const navigate = useNavigate();
   const [term, setTerm] = useState("");
   return (
@@ -64,10 +70,18 @@ export function StoreLayout() {
 
       <header className="sticky top-0 z-40 border-b border-white/10 bg-teal text-white">
         <div className="mx-auto flex h-14 max-w-7xl items-center gap-5 px-4 md:h-16 md:px-8">
-          <button className="lg:hidden" onClick={() => setDrawer(true)} aria-label="Open menu" aria-expanded={drawer}>
+          <button
+            className="lg:hidden"
+            onClick={() => setDrawer(true)}
+            aria-label="Open menu"
+            aria-expanded={drawer}
+          >
             <Menu className="h-5 w-5" />
           </button>
-          <Link to="/" className="font-display text-xl font-extrabold tracking-tight text-white md:text-2xl">
+          <Link
+            to="/"
+            className="font-display text-xl font-extrabold tracking-tight text-white md:text-2xl"
+          >
             Velloria Classic
           </Link>
           <nav className="hidden items-center gap-1 text-sm font-medium lg:flex">
@@ -137,7 +151,11 @@ export function StoreLayout() {
           <div className="border-t border-white/10 bg-teal px-4 py-3">
             <div className="mx-auto flex max-w-7xl items-center gap-3">
               <SearchBox className="flex-1 md:max-w-md" dark />
-              <button className="btn btn-primary" onClick={() => setSearchOpen(false)} aria-label="Close search">
+              <button
+                className="btn btn-primary"
+                onClick={() => setSearchOpen(false)}
+                aria-label="Close search"
+              >
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -145,7 +163,12 @@ export function StoreLayout() {
         )}
 
         {drawer && (
-          <div className="fixed inset-0 z-50 flex lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
+          <div
+            className="fixed inset-0 z-50 flex lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
+          >
             <aside className="flex w-72 flex-col bg-teal text-white">
               <div className="flex h-14 items-center justify-between border-b border-white/10 px-4">
                 <span className="font-display text-xl font-extrabold">Velloria Classic</span>
@@ -154,8 +177,20 @@ export function StoreLayout() {
                 </button>
               </div>
               <nav className="flex flex-col gap-1 p-4 text-sm font-medium">
-                <Link to="/" onClick={() => setDrawer(false)} className="rounded-md px-3 py-2.5 text-white/90 hover:bg-white/10">Home</Link>
-                <Link to="/shop" onClick={() => setDrawer(false)} className="rounded-md bg-accent px-3 py-2.5 font-semibold text-white">Shop</Link>
+                <Link
+                  to="/"
+                  onClick={() => setDrawer(false)}
+                  className="rounded-md px-3 py-2.5 text-white/90 hover:bg-white/10"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/shop"
+                  onClick={() => setDrawer(false)}
+                  className="rounded-md bg-accent px-3 py-2.5 font-semibold text-white"
+                >
+                  Shop
+                </Link>
                 {nav.slice(1).map((n) => (
                   <Link
                     key={n.label}
@@ -172,18 +207,37 @@ export function StoreLayout() {
                 <SearchBox dark />
               </div>
               <div className="mt-auto border-t border-white/10 p-4 text-sm">
-                <Link to={user ? "/account" : "/login"} onClick={() => setDrawer(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-white/90 hover:bg-white/10">
-                  <User className="h-4 w-4" />{user ? user.name.split(" ")[0] : "Sign in"}
+                <Link
+                  to={user ? "/account" : "/login"}
+                  onClick={() => setDrawer(false)}
+                  className="flex items-center gap-3 rounded-md px-3 py-2.5 text-white/90 hover:bg-white/10"
+                >
+                  <User className="h-4 w-4" />
+                  {user ? user.name.split(" ")[0] : "Sign in"}
                 </Link>
-                <Link to="/wishlist" onClick={() => setDrawer(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-white/90 hover:bg-white/10">
-                  <Heart className="h-4 w-4" />Wishlist{ids.length > 0 && ` (${ids.length})`}
+                <Link
+                  to="/wishlist"
+                  onClick={() => setDrawer(false)}
+                  className="flex items-center gap-3 rounded-md px-3 py-2.5 text-white/90 hover:bg-white/10"
+                >
+                  <Heart className="h-4 w-4" />
+                  Wishlist{ids.length > 0 && ` (${ids.length})`}
                 </Link>
-                <Link to="/cart" onClick={() => setDrawer(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-white/90 hover:bg-white/10">
-                  <ShoppingBag className="h-4 w-4" />Shopping bag{count > 0 && ` (${count})`}
+                <Link
+                  to="/cart"
+                  onClick={() => setDrawer(false)}
+                  className="flex items-center gap-3 rounded-md px-3 py-2.5 text-white/90 hover:bg-white/10"
+                >
+                  <ShoppingBag className="h-4 w-4" />
+                  Shopping bag{count > 0 && ` (${count})`}
                 </Link>
               </div>
             </aside>
-            <button className="flex-1 bg-foreground/50" aria-label="Close menu" onClick={() => setDrawer(false)} />
+            <button
+              className="flex-1 bg-foreground/50"
+              aria-label="Close menu"
+              onClick={() => setDrawer(false)}
+            />
           </div>
         )}
       </header>
@@ -197,31 +251,84 @@ export function StoreLayout() {
           <div>
             <p className="font-display text-2xl font-extrabold text-white">Velloria Classic</p>
             <p className="mt-3 leading-relaxed text-white/70">
-              Thoughtfully selected fashion essentials for everyday confidence. Premium quality, honest pricing,
-              delivered across Pakistan.
+              Thoughtfully selected fashion essentials for everyday confidence. Premium quality,
+              honest pricing, delivered across Pakistan.
             </p>
           </div>
           <div className="space-y-2.5">
             <p className="text-xs font-semibold uppercase tracking-wider text-white">Shop</p>
-            <Link to="/shop" className="block text-white/70 hover:text-white">Shop all</Link>
-            <Link to="/shop" search={{ sort: "newest" }} className="block text-white/70 hover:text-white">New arrivals</Link>
-            <Link to="/collections" className="block text-white/70 hover:text-white">Collections</Link>
-            <Link to="/shop" search={{ category: "women" }} className="block text-white/70 hover:text-white">Women's fashion</Link>
-            <Link to="/shop" search={{ category: "men" }} className="block text-white/70 hover:text-white">Men's fashion</Link>
-            <Link to="/shop" search={{ category: "footwear" }} className="block text-white/70 hover:text-white">Footwear</Link>
-            <Link to="/shop" search={{ category: "accessories" }} className="block text-white/70 hover:text-white">Accessories</Link>
+            <Link to="/shop" className="block text-white/70 hover:text-white">
+              Shop all
+            </Link>
+            <Link
+              to="/shop"
+              search={{ sort: "newest" }}
+              className="block text-white/70 hover:text-white"
+            >
+              New arrivals
+            </Link>
+            <Link to="/collections" className="block text-white/70 hover:text-white">
+              Collections
+            </Link>
+            <Link
+              to="/shop"
+              search={{ category: "women" }}
+              className="block text-white/70 hover:text-white"
+            >
+              Women's fashion
+            </Link>
+            <Link
+              to="/shop"
+              search={{ category: "men" }}
+              className="block text-white/70 hover:text-white"
+            >
+              Men's fashion
+            </Link>
+            <Link
+              to="/shop"
+              search={{ category: "footwear" }}
+              className="block text-white/70 hover:text-white"
+            >
+              Footwear
+            </Link>
+            <Link
+              to="/shop"
+              search={{ category: "accessories" }}
+              className="block text-white/70 hover:text-white"
+            >
+              Accessories
+            </Link>
           </div>
           <div className="space-y-2.5">
-            <p className="text-xs font-semibold uppercase tracking-wider text-white">Customer support</p>
-            <Link to="/account" className="block text-white/70 hover:text-white">My account</Link>
-            <Link to="/account" className="block text-white/70 hover:text-white">Order history</Link>
-            <Link to="/wishlist" className="block text-white/70 hover:text-white">Wishlist</Link>
-            <Link to="/about" className="block text-white/70 hover:text-white">About &amp; FAQ</Link>
-            <Link to="/feedback" className="block text-white/70 hover:text-white">Send feedback</Link>
-            <a href="mailto:support@velloriaclassic.com" className="block text-white/70 hover:text-white">support@velloriaclassic.com</a>
+            <p className="text-xs font-semibold uppercase tracking-wider text-white">
+              Customer support
+            </p>
+            <Link to="/account" className="block text-white/70 hover:text-white">
+              My account
+            </Link>
+            <Link to="/account" className="block text-white/70 hover:text-white">
+              Order history
+            </Link>
+            <Link to="/wishlist" className="block text-white/70 hover:text-white">
+              Wishlist
+            </Link>
+            <Link to="/about" className="block text-white/70 hover:text-white">
+              About &amp; FAQ
+            </Link>
+            <Link to="/feedback" className="block text-white/70 hover:text-white">
+              Send feedback
+            </Link>
+            <a
+              href="mailto:support@velloriaclassic.com"
+              className="block text-white/70 hover:text-white"
+            >
+              support@velloriaclassic.com
+            </a>
           </div>
           <div className="space-y-2.5">
-            <p className="text-xs font-semibold uppercase tracking-wider text-white">Payment &amp; delivery</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-white">
+              Payment &amp; delivery
+            </p>
             <p className="text-white/70">Cash on Delivery</p>
             <p className="text-white/70">Bank Transfer</p>
             <p className="text-white/70">Free delivery over $250</p>
@@ -232,8 +339,12 @@ export function StoreLayout() {
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-white/60 md:flex-row md:px-8">
             <p>© 2026 Velloria Classic. All rights reserved.</p>
             <div className="flex gap-5">
-              <Link to="/privacy" className="hover:text-white">Privacy</Link>
-              <Link to="/terms" className="hover:text-white">Terms</Link>
+              <Link to="/privacy" className="hover:text-white">
+                Privacy
+              </Link>
+              <Link to="/terms" className="hover:text-white">
+                Terms
+              </Link>
             </div>
           </div>
         </div>

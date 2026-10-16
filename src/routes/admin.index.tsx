@@ -9,16 +9,35 @@ import { ErrorState, LoadingState, StatusBadge } from "@/components/common/state
 import type { OrderStatus } from "@/types";
 
 export const Route = createFileRoute("/admin/")({
-  head: () => ({ meta: [{ title: "Overview — Velloria Classic Admin" }, { name: "description", content: "Store overview" }, { property: "og:title", content: "Overview — Velloria Classic Admin" }, { property: "og:description", content: "Store overview" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({
+    meta: [
+      { title: "Overview — Velloria Classic Admin" },
+      { name: "description", content: "Store overview" },
+      { property: "og:title", content: "Overview — Velloria Classic Admin" },
+      { property: "og:description", content: "Store overview" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: Overview,
 });
 
 function Stat({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
-  return <div className="panel p-5"><p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</p><p className="mt-2 font-display text-[26px] font-extrabold">{value}</p>{sub && <p className="mt-1 text-xs text-muted-foreground">{sub}</p>}</div>;
+  return (
+    <div className="panel p-5">
+      <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</p>
+      <p className="mt-2 font-display text-[26px] font-extrabold">{value}</p>
+      {sub && <p className="mt-1 text-xs text-muted-foreground">{sub}</p>}
+    </div>
+  );
 }
 
 const chartAxis = { stroke: "#667574", fontSize: 11 };
-const chartTooltipStyle = { borderRadius: 8, border: "1px solid #DCE5E2", fontSize: 12, fontFamily: "Inter, sans-serif" };
+const chartTooltipStyle = {
+  borderRadius: 8,
+  border: "1px solid #DCE5E2",
+  fontSize: 12,
+  fontFamily: "Inter, sans-serif",
+};
 
 const allStatuses: OrderStatus[] = ["pending", "confirmed", "shipped", "delivered", "cancelled"];
 
@@ -39,15 +58,23 @@ function Overview() {
   }, [orders.data]);
 
   const statusCounts = useMemo(
-    () => allStatuses.map((s) => ({ status: s, count: (orders.data ?? []).filter((o) => o.status === s).length })),
+    () =>
+      allStatuses.map((s) => ({
+        status: s,
+        count: (orders.data ?? []).filter((o) => o.status === s).length,
+      })),
     [orders.data],
   );
 
   if (orders.isLoading || products.isLoading || customers.isLoading) return <LoadingState />;
   if (orders.isError) return <ErrorState error={orders.error} onRetry={() => orders.refetch()} />;
-  if (products.isError) return <ErrorState error={products.error} onRetry={() => products.refetch()} />;
-  if (customers.isError) return <ErrorState error={customers.error} onRetry={() => customers.refetch()} />;
-  const o = orders.data!, p = products.data!, c = customers.data!;
+  if (products.isError)
+    return <ErrorState error={products.error} onRetry={() => products.refetch()} />;
+  if (customers.isError)
+    return <ErrorState error={customers.error} onRetry={() => customers.refetch()} />;
+  const o = orders.data!,
+    p = products.data!,
+    c = customers.data!;
   const sales = o.filter((x) => x.status !== "cancelled").reduce((s, x) => s + x.total, 0);
   const pending = o.filter((x) => x.status === "pending").length;
   const lowStock = p.filter((x) => x.stock < 5).length;
@@ -72,9 +99,24 @@ function Overview() {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={salesByDay} margin={{ top: 4, right: 8, left: -8, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#DCE5E2" vertical={false} />
-                <XAxis dataKey="date" tickLine={false} axisLine={{ stroke: "#DCE5E2" }} tick={chartAxis} />
-                <YAxis tickLine={false} axisLine={false} tick={chartAxis} width={64} tickFormatter={(v: number) => `${Math.round(v / 1000)}k`} />
-                <Tooltip cursor={{ fill: "rgba(16,185,129,0.06)" }} contentStyle={chartTooltipStyle} formatter={(v) => [money(Number(v)), "Sales"]} />
+                <XAxis
+                  dataKey="date"
+                  tickLine={false}
+                  axisLine={{ stroke: "#DCE5E2" }}
+                  tick={chartAxis}
+                />
+                <YAxis
+                  tickLine={false}
+                  axisLine={false}
+                  tick={chartAxis}
+                  width={64}
+                  tickFormatter={(v: number) => `${Math.round(v / 1000)}k`}
+                />
+                <Tooltip
+                  cursor={{ fill: "rgba(16,185,129,0.06)" }}
+                  contentStyle={chartTooltipStyle}
+                  formatter={(v) => [money(Number(v)), "Sales"]}
+                />
                 <Bar dataKey="total" fill="#10B981" radius={[4, 4, 0, 0]} maxBarSize={40} />
               </BarChart>
             </ResponsiveContainer>
@@ -85,11 +127,32 @@ function Overview() {
           <p className="text-xs text-muted-foreground">Fulfilment pipeline</p>
           <div className="mt-4 h-56">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={statusCounts} layout="vertical" margin={{ top: 4, right: 16, left: 8, bottom: 0 }}>
+              <BarChart
+                data={statusCounts}
+                layout="vertical"
+                margin={{ top: 4, right: 16, left: 8, bottom: 0 }}
+              >
                 <CartesianGrid strokeDasharray="3 3" stroke="#DCE5E2" horizontal={false} />
-                <XAxis type="number" allowDecimals={false} tickLine={false} axisLine={{ stroke: "#DCE5E2" }} tick={chartAxis} />
-                <YAxis type="category" dataKey="status" tickLine={false} axisLine={false} tick={chartAxis} width={90} />
-                <Tooltip cursor={{ fill: "rgba(16,43,43,0.05)" }} contentStyle={chartTooltipStyle} formatter={(v) => [v, "Orders"]} />
+                <XAxis
+                  type="number"
+                  allowDecimals={false}
+                  tickLine={false}
+                  axisLine={{ stroke: "#DCE5E2" }}
+                  tick={chartAxis}
+                />
+                <YAxis
+                  type="category"
+                  dataKey="status"
+                  tickLine={false}
+                  axisLine={false}
+                  tick={chartAxis}
+                  width={90}
+                />
+                <Tooltip
+                  cursor={{ fill: "rgba(16,43,43,0.05)" }}
+                  contentStyle={chartTooltipStyle}
+                  formatter={(v) => [v, "Orders"]}
+                />
                 <Bar dataKey="count" fill="#102B2B" radius={[0, 4, 4, 0]} maxBarSize={18} />
               </BarChart>
             </ResponsiveContainer>
@@ -98,18 +161,36 @@ function Overview() {
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <Link to="/admin/payments" className="panel p-5 transition-colors hover:border-foreground"><p className="font-semibold">{awaiting} bank transfers awaiting verification</p><p className="text-sm text-muted-foreground">Review references →</p></Link>
-        <Link to="/admin/fraud" className="panel p-5 transition-colors hover:border-foreground"><p className="font-semibold">{flagged} orders flagged for fraud</p><p className="text-sm text-muted-foreground">Review risk signals →</p></Link>
+        <Link to="/admin/payments" className="panel p-5 transition-colors hover:border-foreground">
+          <p className="font-semibold">{awaiting} bank transfers awaiting verification</p>
+          <p className="text-sm text-muted-foreground">Review references →</p>
+        </Link>
+        <Link to="/admin/fraud" className="panel p-5 transition-colors hover:border-foreground">
+          <p className="font-semibold">{flagged} orders flagged for fraud</p>
+          <p className="text-sm text-muted-foreground">Review risk signals →</p>
+        </Link>
       </div>
       <h2 className="mb-3 mt-8 text-xl">Recent orders</h2>
       <div className="panel overflow-x-auto">
         <table className="w-full min-w-[480px] text-sm">
           <thead className="border-b bg-muted/50 text-left text-xs uppercase tracking-wider text-muted-foreground">
-            <tr><th className="p-3 font-semibold">Order</th><th className="p-3 font-semibold">Customer</th><th className="p-3 font-semibold">Status</th><th className="p-3 text-right font-semibold">Total</th></tr>
+            <tr>
+              <th className="p-3 font-semibold">Order</th>
+              <th className="p-3 font-semibold">Customer</th>
+              <th className="p-3 font-semibold">Status</th>
+              <th className="p-3 text-right font-semibold">Total</th>
+            </tr>
           </thead>
           <tbody className="divide-y">
             {o.slice(0, 5).map((x) => (
-              <tr key={x.id} className="hover:bg-muted/40"><td className="p-3 font-medium">{x.id}</td><td className="p-3">{x.customerName}</td><td className="p-3"><StatusBadge status={x.status} /></td><td className="p-3 text-right">{money(x.total)}</td></tr>
+              <tr key={x.id} className="hover:bg-muted/40">
+                <td className="p-3 font-medium">{x.id}</td>
+                <td className="p-3">{x.customerName}</td>
+                <td className="p-3">
+                  <StatusBadge status={x.status} />
+                </td>
+                <td className="p-3 text-right">{money(x.total)}</td>
+              </tr>
             ))}
           </tbody>
         </table>

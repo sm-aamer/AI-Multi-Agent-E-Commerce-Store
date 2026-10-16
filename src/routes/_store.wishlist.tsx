@@ -27,7 +27,9 @@ function Wishlist() {
     <div className="mx-auto max-w-7xl px-4 py-10 md:px-8">
       <p className="eyebrow">Saved for later</p>
       <h1 className="mt-2 text-[28px] md:text-[34px]">My Wishlist</h1>
-      <p className="mt-1 text-sm text-muted-foreground">{ids.length} item{ids.length === 1 ? "" : "s"} saved — stored in this browser for the demo.</p>
+      <p className="mt-1 text-sm text-muted-foreground">
+        {ids.length} item{ids.length === 1 ? "" : "s"} saved — stored in this browser for the demo.
+      </p>
       <div className="mt-8">
         {products.isLoading ? (
           <SkeletonGrid count={4} />
@@ -37,7 +39,11 @@ function Wishlist() {
           <EmptyState
             title="Your wishlist is empty"
             body="Tap the heart on any product to save it here."
-            action={<Link to="/shop" className="btn btn-primary">Discover products</Link>}
+            action={
+              <Link to="/shop" className="btn btn-primary">
+                Discover products
+              </Link>
+            }
           />
         ) : (
           <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-4">

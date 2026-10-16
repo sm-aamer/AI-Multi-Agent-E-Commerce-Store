@@ -21,12 +21,26 @@ function Register() {
   return (
     <div className="mx-auto max-w-md px-4 py-16">
       <h1 className="text-4xl">Create account</h1>
-      <p className="mb-8 mt-2 text-sm text-muted-foreground">Track orders and get personalised picks.</p>
+      <p className="mb-8 mt-2 text-sm text-muted-foreground">
+        Track orders and get personalised picks.
+      </p>
       <AuthForm
         mode="register"
         hint={USE_MOCK ? "Demo mode: accounts live in memory and reset on reload." : undefined}
-        onSubmit={async (v) => { const s = await api.register(v.name!, v.email, v.password); signIn(s); navigate({ to: "/account" }); return s; }}
-        footer={<p className="text-center text-sm">Already have an account? <Link to="/login" className="underline">Sign in</Link></p>}
+        onSubmit={async (v) => {
+          const s = await api.register(v.name!, v.email, v.password);
+          signIn(s);
+          navigate({ to: "/account" });
+          return s;
+        }}
+        footer={
+          <p className="text-center text-sm">
+            Already have an account?{" "}
+            <Link to="/login" className="underline">
+              Sign in
+            </Link>
+          </p>
+        }
       />
     </div>
   );

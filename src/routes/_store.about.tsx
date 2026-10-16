@@ -11,7 +11,10 @@ export const Route = createFileRoute("/_store/about")({
   head: () => ({
     meta: [
       { title: "About — Velloria Classic" },
-      { name: "description", content: "The story behind Velloria Classic, plus delivery, payment and returns answers." },
+      {
+        name: "description",
+        content: "The story behind Velloria Classic, plus delivery, payment and returns answers.",
+      },
       { property: "og:title", content: "About — Velloria Classic" },
       { property: "og:description", content: "The story behind Velloria Classic." },
     ],
@@ -33,7 +36,8 @@ const faqs = [
     a: "Yes — unworn items with tags attached can be returned within 14 days of delivery. Raise a request from your order page and our team will review it.",
   },
   {
-    q: "Do you have physical stores?",        a: "Velloria Classic is online-first for now, with plans for a flagship store next season. Join the newsletter to hear about pop-ups first.",
+    q: "Do you have physical stores?",
+    a: "Velloria Classic is online-first for now, with plans for a flagship store next season. Join the newsletter to hear about pop-ups first.",
   },
 ];
 
@@ -43,24 +47,24 @@ function About() {
       <p className="eyebrow">Our story</p>
       <h1 className="mt-2 text-[28px] md:text-[36px]">Fashion that earns its place.</h1>
       <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
-        Velloria Classic is a modern fashion destination built around a simple idea: fewer, better pieces. Every item in the
-        collection is chosen for quality of material, honesty of price and how hard it works in a real wardrobe — from
-        weekday layers to weekend staples.
+        Velloria Classic is a modern fashion destination built around a simple idea: fewer, better
+        pieces. Every item in the collection is chosen for quality of material, honesty of price and
+        how hard it works in a real wardrobe — from weekday layers to weekend staples.
       </p>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
         <div className="panel p-6">
           <h2 className="text-lg">How we select</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Small batches, natural fabrics and fit-first sampling. If a piece doesn't pass our wear tests, it doesn't
-            make the collection.
+            Small batches, natural fabrics and fit-first sampling. If a piece doesn't pass our wear
+            tests, it doesn't make the collection.
           </p>
         </div>
         <div className="panel p-6">
           <h2 className="text-lg">Honest pricing</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Transparent pricing in USD with no fake discounts. When something is on sale, the original price is the one
-            we actually sold at.
+            Transparent pricing in USD with no fake discounts. When something is on sale, the
+            original price is the one we actually sold at.
           </p>
         </div>
       </div>
@@ -68,10 +72,34 @@ function About() {
       <section className="mt-14">
         <h2 className="text-[24px] md:text-[28px]">Good to know</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-          <div className="panel flex items-start gap-3 p-4"><Truck className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Worldwide delivery</p><p className="mt-1 text-muted-foreground">3–5 working days, free over $250.</p></div></div>
-          <div className="panel flex items-start gap-3 p-4"><Banknote className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Cash on Delivery</p><p className="mt-1 text-muted-foreground">Pay when your order arrives.</p></div></div>
-          <div className="panel flex items-start gap-3 p-4"><Landmark className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Bank Transfer</p><p className="mt-1 text-muted-foreground">Verified before shipping.</p></div></div>
-          <div className="panel flex items-start gap-3 p-4"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" /><div><p className="font-semibold">Real support</p><p className="mt-1 text-muted-foreground">Mon–Sat, support@velloriaclassic.com</p></div></div>
+          <div className="panel flex items-start gap-3 p-4">
+            <Truck className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+            <div>
+              <p className="font-semibold">Worldwide delivery</p>
+              <p className="mt-1 text-muted-foreground">3–5 working days, free over $250.</p>
+            </div>
+          </div>
+          <div className="panel flex items-start gap-3 p-4">
+            <Banknote className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+            <div>
+              <p className="font-semibold">Cash on Delivery</p>
+              <p className="mt-1 text-muted-foreground">Pay when your order arrives.</p>
+            </div>
+          </div>
+          <div className="panel flex items-start gap-3 p-4">
+            <Landmark className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+            <div>
+              <p className="font-semibold">Bank Transfer</p>
+              <p className="mt-1 text-muted-foreground">Verified before shipping.</p>
+            </div>
+          </div>
+          <div className="panel flex items-start gap-3 p-4">
+            <Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+            <div>
+              <p className="font-semibold">Real support</p>
+              <p className="mt-1 text-muted-foreground">Mon–Sat, support@velloriaclassic.com</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -92,7 +120,9 @@ function About() {
           <h2 className="text-xl text-white">Ready to refresh your rotation?</h2>
           <p className="mt-1 text-sm text-white/70">The new season edit is live now.</p>
         </div>
-        <Link to="/shop" className="btn btn-primary">Shop the collection</Link>
+        <Link to="/shop" className="btn btn-primary">
+          Shop the collection
+        </Link>
       </div>
     </div>
   );

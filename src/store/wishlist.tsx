@@ -16,10 +16,16 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
   const [ids, setIds] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
   useEffect(() => {
-    try { setIds(JSON.parse(localStorage.getItem(KEY) ?? "[]")); } catch { /* ignore */ }
+    try {
+      setIds(JSON.parse(localStorage.getItem(KEY) ?? "[]"));
+    } catch {
+      /* ignore */
+    }
     setReady(true);
   }, []);
-  useEffect(() => { if (ready) localStorage.setItem(KEY, JSON.stringify(ids)); }, [ids, ready]);
+  useEffect(() => {
+    if (ready) localStorage.setItem(KEY, JSON.stringify(ids));
+  }, [ids, ready]);
 
   const value: Ctx = {
     ids,

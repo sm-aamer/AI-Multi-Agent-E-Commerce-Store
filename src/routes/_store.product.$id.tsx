@@ -15,7 +15,10 @@ export const Route = createFileRoute("/_store/product/$id")({
   head: () => ({
     meta: [
       { title: "Product details — Velloria Classic" },
-      { name: "description", content: "Product details, sizing and availability at Velloria Classic." },
+      {
+        name: "description",
+        content: "Product details, sizing and availability at Velloria Classic.",
+      },
       { property: "og:title", content: "Product details — Velloria Classic" },
       { property: "og:description", content: "Product details, sizing and availability." },
     ],
@@ -42,7 +45,9 @@ function ProductPage() {
     return [...new Set([p.image, cat?.image, hero].filter(Boolean) as string[])];
   }, [p, cats.data]);
 
-  useEffect(() => { setImgIndex(0); }, [id]);
+  useEffect(() => {
+    setImgIndex(0);
+  }, [id]);
 
   if (product.isLoading) return <LoadingState label="Loading product…" />;
   if (product.isError || !p)
@@ -50,8 +55,12 @@ function ProductPage() {
       <div className="mx-auto max-w-xl px-4 py-20">
         <div className="panel flex flex-col items-center px-6 py-14 text-center">
           <h1 className="text-2xl">Product not found</h1>
-          <p className="mt-2 text-sm text-muted-foreground">It may have been removed from the collection.</p>
-          <Link to="/shop" className="btn btn-primary mt-6">Back to shop</Link>
+          <p className="mt-2 text-sm text-muted-foreground">
+            It may have been removed from the collection.
+          </p>
+          <Link to="/shop" className="btn btn-primary mt-6">
+            Back to shop
+          </Link>
         </div>
       </div>
     );
@@ -69,11 +78,28 @@ function ProductPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
       <nav aria-label="Breadcrumb" className="text-xs text-muted-foreground">
         <ol className="flex flex-wrap items-center gap-1.5">
-          <li className="flex items-center gap-1.5"><Link to="/" className="hover:text-foreground">Home</Link><span>/</span></li>
-          <li className="flex items-center gap-1.5"><Link to="/shop" className="hover:text-foreground">Shop</Link><span>/</span></li>
+          <li className="flex items-center gap-1.5">
+            <Link to="/" className="hover:text-foreground">
+              Home
+            </Link>
+            <span>/</span>
+          </li>
+          <li className="flex items-center gap-1.5">
+            <Link to="/shop" className="hover:text-foreground">
+              Shop
+            </Link>
+            <span>/</span>
+          </li>
           {category && (
             <li className="flex items-center gap-1.5">
-              <Link to="/shop" search={{ category: category.slug }} className="hover:text-foreground">{category.name}</Link><span>/</span>
+              <Link
+                to="/shop"
+                search={{ category: category.slug }}
+                className="hover:text-foreground"
+              >
+                {category.name}
+              </Link>
+              <span>/</span>
             </li>
           )}
           <li className="font-medium text-foreground">{p.name}</li>
@@ -82,7 +108,11 @@ function ProductPage() {
 
       <div className="mt-6 grid gap-10 md:grid-cols-2">
         <div>
-          <img src={gallery[imgIndex] ?? p.image} alt={p.name} className="aspect-[4/5] w-full rounded-xl object-cover" />
+          <img
+            src={gallery[imgIndex] ?? p.image}
+            alt={p.name}
+            className="aspect-[4/5] w-full rounded-xl object-cover"
+          />
           {gallery.length > 1 && (
             <div className="mt-3 flex gap-3">
               {gallery.map((src, i) => (
@@ -105,9 +135,13 @@ function ProductPage() {
           <h1 className="mt-3 text-[30px] leading-tight md:text-[38px]">{p.name}</h1>
           <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
             <span className="text-2xl font-bold">{money(p.price)}</span>
-            {p.compareAtPrice && <span className="text-muted-foreground line-through">{money(p.compareAtPrice)}</span>}
             {p.compareAtPrice && (
-              <span className="chip bg-mint text-teal">Save {money(p.compareAtPrice - p.price)}</span>
+              <span className="text-muted-foreground line-through">{money(p.compareAtPrice)}</span>
+            )}
+            {p.compareAtPrice && (
+              <span className="chip bg-mint text-teal">
+                Save {money(p.compareAtPrice - p.price)}
+              </span>
             )}
             {p.rating > 0 && (
               <span className="ml-auto flex items-center gap-1.5 text-muted-foreground">
@@ -126,7 +160,10 @@ function ProductPage() {
                 {p.sizes.map((s) => (
                   <button
                     key={s}
-                    onClick={() => { setSize(s); setErr(""); }}
+                    onClick={() => {
+                      setSize(s);
+                      setErr("");
+                    }}
                     className={`h-10 min-w-12 rounded-lg border px-3 text-sm transition-colors ${size === s ? "border-teal bg-teal text-white" : "hover:border-foreground"}`}
                   >
                     {s}
@@ -139,9 +176,21 @@ function ProductPage() {
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <div className="flex items-center rounded-lg border">
-              <button className="p-3" onClick={() => setQty(Math.max(1, qty - 1))} aria-label="Decrease quantity"><Minus className="h-4 w-4" /></button>
+              <button
+                className="p-3"
+                onClick={() => setQty(Math.max(1, qty - 1))}
+                aria-label="Decrease quantity"
+              >
+                <Minus className="h-4 w-4" />
+              </button>
               <span className="w-8 text-center text-sm">{qty}</span>
-              <button className="p-3" onClick={() => setQty(Math.min(Math.max(p.stock, 1), qty + 1))} aria-label="Increase quantity"><Plus className="h-4 w-4" /></button>
+              <button
+                className="p-3"
+                onClick={() => setQty(Math.min(Math.max(p.stock, 1), qty + 1))}
+                aria-label="Increase quantity"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
             </div>
             <button className="btn btn-primary flex-1 py-3" disabled={p.stock === 0} onClick={add}>
               {p.stock === 0 ? "Sold out" : "Add to Bag"}
@@ -174,13 +223,16 @@ function ProductPage() {
             {p.material && (
               <div className="p-4">
                 <p className="font-semibold">Material & care</p>
-                <p className="mt-1 text-muted-foreground">{p.material}. Wash cold or dry clean — see care label.</p>
+                <p className="mt-1 text-muted-foreground">
+                  {p.material}. Wash cold or dry clean — see care label.
+                </p>
               </div>
             )}
             <div className="p-4">
               <p className="font-semibold">Delivery & returns</p>
               <p className="mt-1 text-muted-foreground">
-                Dispatched in 1–2 working days. Free returns within 14 days on unworn items with tags attached.
+                Dispatched in 1–2 working days. Free returns within 14 days on unworn items with
+                tags attached.
               </p>
             </div>
           </div>
@@ -191,7 +243,11 @@ function ProductPage() {
         <section className="mt-20">
           <div className="mb-6 flex items-end justify-between">
             <h2 className="text-[26px] md:text-[30px]">You may also like</h2>
-            <Link to="/shop" search={{ category: category?.slug }} className="text-sm font-medium text-accent underline underline-offset-4">
+            <Link
+              to="/shop"
+              search={{ category: category?.slug }}
+              className="text-sm font-medium text-accent underline underline-offset-4"
+            >
               View all
             </Link>
           </div>
@@ -199,7 +255,9 @@ function ProductPage() {
             {related.data
               .filter((r) => r.categoryId === p.categoryId && r.id !== p.id)
               .slice(0, 4)
-              .map((r) => <ProductCard key={r.id} product={r} />)}
+              .map((r) => (
+                <ProductCard key={r.id} product={r} />
+              ))}
           </div>
         </section>
       )}

@@ -22,9 +22,15 @@ export const Route = createFileRoute("/_store/shop")({
   head: () => ({
     meta: [
       { title: "Shop all — Velloria Classic" },
-      { name: "description", content: "Browse the full Velloria Classic collection. Filter by category and price." },
+      {
+        name: "description",
+        content: "Browse the full Velloria Classic collection. Filter by category and price.",
+      },
       { property: "og:title", content: "Shop all — Velloria Classic" },
-      { property: "og:description", content: "Browse and filter the full Velloria Classic collection." },
+      {
+        property: "og:description",
+        content: "Browse and filter the full Velloria Classic collection.",
+      },
     ],
   }),
   component: Shop,
@@ -38,7 +44,10 @@ const priceRanges: { label: string; min?: number; max?: number }[] = [
 ];
 
 function FilterPanel({
-  search, cats, set, clear,
+  search,
+  cats,
+  set,
+  clear,
 }: {
   search: ProductQuery;
   cats: { id: string; name: string; slug: string }[] | undefined;
@@ -48,7 +57,9 @@ function FilterPanel({
   return (
     <div className="space-y-7 text-sm">
       <div>
-        <label htmlFor="filter-search" className="font-semibold">Search</label>
+        <label htmlFor="filter-search" className="font-semibold">
+          Search
+        </label>
         <input
           id="filter-search"
           className="field mt-2"
@@ -111,7 +122,9 @@ function Shop() {
   const products = useQuery(q.products(search));
   const cats = useQuery(q.categories());
   const category = cats.data?.find((c) => c.slug === search.category);
-  const isFiltered = Boolean(search.q || search.category || search.minPrice !== undefined || search.maxPrice !== undefined);
+  const isFiltered = Boolean(
+    search.q || search.category || search.minPrice !== undefined || search.maxPrice !== undefined,
+  );
 
   const crumbs = [
     { label: "Home", to: "/" as const },
@@ -127,7 +140,9 @@ function Shop() {
           {crumbs.map((c, i) => (
             <li key={`${c.label}-${i}`} className="flex items-center gap-1.5">
               {"to" in c && c.to ? (
-                <Link to={c.to} className="hover:text-foreground">{c.label}</Link>
+                <Link to={c.to} className="hover:text-foreground">
+                  {c.label}
+                </Link>
               ) : (
                 <span className="font-medium text-foreground">{c.label}</span>
               )}
@@ -139,9 +154,13 @@ function Shop() {
 
       <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-[28px] md:text-[34px]">{category?.name ?? (search.q ? `Results for “${search.q}”` : "Shop All")}</h1>
+          <h1 className="text-[28px] md:text-[34px]">
+            {category?.name ?? (search.q ? `Results for “${search.q}”` : "Shop All")}
+          </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {products.data ? `${products.data.length} product${products.data.length === 1 ? "" : "s"}` : " "}
+            {products.data
+              ? `${products.data.length} product${products.data.length === 1 ? "" : "s"}`
+              : " "}
             {!isFiltered && <span> · Free delivery over {money(FREE_SHIPPING_OVER)}</span>}
           </p>
         </div>
@@ -177,22 +196,35 @@ function Shop() {
             <EmptyState
               title="No products found"
               body="Try a different search or clear your filters to see the full collection."
-              action={<button className="btn btn-primary" onClick={clear}>Clear filters</button>}
+              action={
+                <button className="btn btn-primary" onClick={clear}>
+                  Clear filters
+                </button>
+              }
             />
           ) : (
             <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3">
-              {products.data!.map((p) => <ProductCard key={p.id} product={p} />)}
+              {products.data!.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
             </div>
           )}
         </div>
       </div>
 
       {drawer && (
-        <div className="fixed inset-0 z-50 flex lg:hidden" role="dialog" aria-modal="true" aria-label="Filters">
+        <div
+          className="fixed inset-0 z-50 flex lg:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Filters"
+        >
           <div className="flex w-80 max-w-[85vw] flex-col bg-card">
             <div className="flex items-center justify-between border-b px-4 py-3.5">
               <p className="font-display text-lg font-bold">Filters</p>
-              <button onClick={() => setDrawer(false)} aria-label="Close filters"><X className="h-5 w-5" /></button>
+              <button onClick={() => setDrawer(false)} aria-label="Close filters">
+                <X className="h-5 w-5" />
+              </button>
             </div>
             <div className="flex-1 overflow-y-auto p-4">
               <FilterPanel search={search} cats={cats.data} set={set} clear={clear} />
@@ -203,7 +235,11 @@ function Shop() {
               </button>
             </div>
           </div>
-          <button className="flex-1 bg-foreground/50" aria-label="Close filters" onClick={() => setDrawer(false)} />
+          <button
+            className="flex-1 bg-foreground/50"
+            aria-label="Close filters"
+            onClick={() => setDrawer(false)}
+          />
         </div>
       )}
     </div>
